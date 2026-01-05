@@ -1,101 +1,47 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSS Only Side Nav with Close</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  /* Hide the checkbox */
-  #menu-toggle {
-    display: none;
-  }
-
-  /* Hamburger icon */
-  .menu-icon {
-    display: block;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 24px;
-    background-color: #111;
-    color: white;
-  }
-
-  /* Side nav styling */
-  .sidenav {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Hidden by default */
-    width: 250px;
-    height: 100%;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: 0.3s;
-  }
-
-  .sidenav a {
-    display: block;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-  }
-
-  .sidenav a:hover {
-    background-color: #575757;
-  }
-
-  /* Close button inside the nav */
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-  }
-
-  /* Show nav when checkbox is checked */
-  #menu-toggle:checked + .menu-icon + .sidenav {
-    left: 0;
-  }
-
-  /* Main content */
-  .main {
-    padding: 20px;
-  }
-
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1,0">
+<link rel="stylesheet" href="stylesheet.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<title>Navbar
+</title>
 </head>
 <body>
+   
+    
+    <div class="container" id="main">
+        <a href="javascript:void(0)" style="color:white" onmouseover="toggleNav()">&#9776;</a>
+        <div class="account-wrapper">
+            <a href="Account.html"><img src="account.png" class="account"></a>
+            <span class="Position-Account">Account</span>
+        </div>
+    </div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" onmouseover="bigfont4(this)" onmouseleave="normalfont(this)">&times;</a>
+        <a href="#" onmouseover="bigfont()" id="big" onmouseleave="normalfont(this)">About</a>
+        <a href="#" onmouseover="bigfont2(this)" onmouseleave="normalfont(this)">Memberships</a>
+        <a href="Account.html" onmouseover="bigfont3(this)"  onmouseleave="normalfont(this)">Account</a>
+    </div>
 
-<!-- Hidden checkbox -->
-<input type="checkbox" id="menu-toggle">
 
-<!-- Hamburger icon -->
-<label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-<!-- Side navigation -->
-<div class="sidenav">
-  <!-- Close button -->
-  <label for="menu-toggle" class="close-btn">&times;</label>
-  
-  <a href="#">Home</a>
-  <a href="#">Services</a>
-  <a href="#">About</a>
-  <a href="#">Contact</a>
-</div>
 
-<!-- Main content -->
-<div class="main">
-  <h2>Welcome!</h2>
-  <p>Click the three lines ☰ to open the side navigation. Click × to close it.</p>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+<script
+    src="index.js">
+</script>
 
 </body>
 </html>
