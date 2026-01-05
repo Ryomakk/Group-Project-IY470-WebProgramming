@@ -2,9 +2,6 @@
 function toggleNav(){       //sets a function called toggleNav() execute when called
 const mySidenav = document.getElementById('mySidenav')  //if the element has the id mysidenav it will execute
 const main = document.getElementById('main') //if the element has the id main it will execute
-
-
-
 if (mySidenav.style.width === '250px'){     //if the sidenavbar width is 200px wide ]
   //then close the sidenavbar by setting width to 0 and marginleft makes it go to the original settings.it closes the side nav bar
   mySidenav.style.width = '0'
