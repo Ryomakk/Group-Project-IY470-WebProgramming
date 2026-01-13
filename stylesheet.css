@@ -46,7 +46,9 @@ body{
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 a:hover{
-    text-shadow:2px 1px  rgb(15, 5, 5);
+    text-shadow:2px 1px  rgb(162, 16, 16);
+    
+    
 }
 .account{
     width: 30px;
