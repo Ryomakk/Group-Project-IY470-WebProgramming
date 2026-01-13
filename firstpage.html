@@ -11,13 +11,13 @@
 </head>
 <body>
     <div class="container" id="main">
-        <a href="javascript:void(0)" style="color:white" onmouseover="toggleNav()">&#9776;</a>
+        <a href="javascript:void(0)" style="color:white" onclick="toggleNav(); event.stopPropagation();">&#9776;</a>
         <div class="account-wrapper">
             <a href="Account.html"><img src="account.png" class="account"></a>
             <span class="Position-Account">Account</span>
         </div>
     </div>
-    <div id="mySidenav" class="sidenav">
+    <div id="mySidenav" class="sidenav" onclick="event.stopPropagation()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" onmouseover="bigfont4(this)" onmouseleave="normalfont(this)">&times;</a>
         <a href="#" onmouseover="bigfont()" id="big" onmouseleave="normalfont(this)">About</a>
         <a href="#" onmouseover="bigfont2(this)" onmouseleave="normalfont(this)">Memberships</a>
