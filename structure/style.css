@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px;
+    text-align: center;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.comparison {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.gym {
+    flex: 1;
+    min-width: 300px;
+    border: 2px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.cheapest {
+    border-color: green;
+    background-color: #eaffea;
+}
