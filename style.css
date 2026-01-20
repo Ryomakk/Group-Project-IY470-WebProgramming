@@ -160,13 +160,13 @@ button{                      /*login button*/
 
 .create_account{
     padding:15px;
-    margin-right:100px;
+    margin-right:auto;
 }
 
 #login {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 3s;
+    transition: max-height 1.5s;
     padding: 0 10px;
 }
 
