@@ -2,29 +2,56 @@
 <html lang="en">
     
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1,0">
-<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="stylesheet.css">
+
 <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<title>Navbar
-</title>
+
+<title>Navbar</title>
+
 </head>
-<body>
-    <div class="container" id="main">
-        <a href="javascript:void(0)" style="color:white" onclick="toggleNav(); event.stopPropagation();">&#9776;</a>
-        <div class="account-wrapper">
-            <a href="Account.html"><img src="account.png" class="account"></a>
-            <span class="Position-Account">Log In</span>
-        </div>
+
+<body class = "main"> 
+
+    <div class="container" id="main"> 
+        <a href="javascript:void(0)" style="color:white" onmouseover="toggleNav(); event.stopPropagation();">&#9776;</a> <!--hover bar-->
+     <div class="account-wrapper">
+        <a href="Account.html" target="_blank"><img src="account.png" class="account"></a>
+            <span class="Position-Account"> Log In </span>
     </div>
+
+</div>
+
+<form method ="post" action="#" id="login">
+    <label for="membership">Membership ID</label>
+    <br>
+    <input type="text" id="membership" name="membership" placeholder="Enter your MembershipID">
+    <br>
+
+    <label for="password">Password</label>
+    <br>
+    <input type="text" id="password" name="pass_word" placeholder="Enter your password">
+    <br>
+    <button type="submit">Login</button>
+    <label for="create_account" id="create" name="creation" style="text-decoration:underline" class="create_account">Don't have an account ? Click here to create one!</label>
+
+    
+ </form>
     <div id="mySidenav" class="sidenav" onclick="event.stopPropagation()">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" onmouseover="bigfont4(this)" onmouseleave="normalfont(this)">&times;</a>
-        <a href="index.html" onmouseover="bigfont()" id="big" onmouseleave="normalfont(this)">About</a>
+        <a href="firstpage.html" onmouseover="bigfont()" id="big" onmouseleave="normalfont(this)">About</a>
         <a href="#" onmouseover="bigfont2(this)" onmouseleave="normalfont(this)">Memberships</a>
         <a href="Account.html" onmouseover="bigfont3(this)"  onmouseleave="normalfont(this)">Account</a>
     </div>
 <script
     src="index.js">
+    document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("login").classList.add("open");
+});
 </script>
 </body>
 </html>
