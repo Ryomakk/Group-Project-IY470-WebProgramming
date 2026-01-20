@@ -127,11 +127,12 @@ th {
     background-color: #f0f0f0;
 }
 .main{
-     background-image:linear-gradient(to right,purple , aqua);
+     background-image:linear-gradient(135deg,rgb(16, 94, 172) , rgb(231, 82, 181));
     
 }
 form{                 /*login form grid*/
     display:grid;
+   
     padding:40px;
     border:3px solid black;
     margin-left:50px;
@@ -140,8 +141,16 @@ form{                 /*login form grid*/
     font-size:20px;
     background-image:linear-gradient(to right, aqua,rgb(50, 50, 161));
     border-radius:30px;
+    position:relative;
     
-    
+}
+
+form img{
+   width:330px;
+   position:absolute;
+   bottom:1px;
+   right:1px;
+   border-radius: 15%;
 }
 input[type="text"], input[type="password"], select {        /*every input that takes text will be selected*/
     width:50%;
