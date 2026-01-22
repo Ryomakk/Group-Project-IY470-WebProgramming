@@ -82,7 +82,7 @@ git commit -m "Add homepage layout"
 git push origin feature-name
 ```
 
-if you don't know your branch name or what branch you are at - git brench (eg. *main, *blabla *mean the current branch)
+if you don't know your branch name or what branch you are at - git branch (eg. *main, *blabla *mean the current branch)
 Example:
 
 ```bash
