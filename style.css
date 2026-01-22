@@ -146,11 +146,12 @@ form{                 /*login form grid*/
 }
 
 form img{
-   width:330px;
+   width:333px;
    position:absolute;
+   top:1px;
    bottom:1px;
    right:1px;
-   border-radius: 15%;
+   
 }
 input[type="text"], input[type="password"], select {        /*every input that takes text will be selected*/
     width:50%;
@@ -168,8 +169,9 @@ button{                      /*login button*/
 
 
 .create_account{
-    padding:15px;
+    padding:1px;
     margin-right:auto;
+    
 }
 
 #login {
