@@ -1,179 +1,240 @@
+/* =========================
+   TOP NAVIGATION BAR
+   ========================= */
 .container{
-    display: flex;
-    background-color:#111;
+    display: flex;                 /* horizontal layout */
+    background-color:#111;         /* dark navbar */
     width:auto;
     height:58px;
-    align-items: center;
-    gap:1000px;
+    align-items: center;           /* vertically center items */
+    gap:1000px;                    /* space between items */
     font-size:30px;
     color:white;
     padding:10px;
-    transition:0.33s;
+    transition:0.33s;              /* smooth hover/size changes */
 }
 
+/* Navbar links */
 .container a{
-    text-decoration: none;
+    text-decoration: none;         /* remove underline */
     cursor:pointer;
-    display: inline-flex;
+    display: inline-flex;          /* align icon + text */
     align-items: center;
 }
 
+/* Utility class to hide elements */
 .None{ 
     display:none;
 }
 
+/* Remove default browser margin */
 body{
     margin:0;
 }
+
+/* =========================
+   SIDE NAVIGATION BAR
+   ========================= */
+
+/* Side nav links */
 .sidenav a {
-  padding: 8px 8px 8px 30px;
+  padding: 8px 8px 8px 30px;       /* inner spacing */
   text-decoration: none;
   font-size: 25px;
   color: #fbfafa;
   display: block;
-  transition: 0.3s;
+  transition: 0.3s;               /* hover animation */
 }
+
+/* Side navigation container */
 .sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%;                   /* full screen height */
+  width: 0;                       /* hidden by default */
+  position: fixed;
+  z-index: 1;
+  top: 0;
   left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 50px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  background-color: #111;
+  overflow-x: hidden;             /* prevent horizontal scroll */
+  padding-top: 50px;
+  transition: 0.5s;               /* slide animation */
 }
+
+/* Hover effect for all links */
 a:hover{
-    text-shadow:2px 1px  rgb(15, 5, 5);
+    text-shadow:2px 1px rgb(15, 5, 5);
 }
+
+/* =========================
+   ACCOUNT / PROFILE SECTION
+   ========================= */
+
+/* Circular account icon */
 .account{
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     background-color: rgb(251, 248, 248);
     border-radius: 50%;
     margin: 0;
 }
 
+/* Wrapper for account icon + name */
 .account-wrapper {
-    
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+/* Account username text */
 .Position-Account{
     font-size: 20px;
     color: rgb(240, 235, 235);
-    
 }
 
+/* =========================
+   GYM COMPARISON GRID
+   ========================= */
 
-
+/* Grid layout for gym cards */
 .gym-grid {
   display: grid; 
-  grid-template-areas: 'page1 page2'; /* to make the grid side to sides */
-  gap: 25px; /* space between the boxes */
+  grid-template-areas: 'page1 page2'; /* side-by-side layout */
+  gap: 25px;
   margin: 50px 50px 40px 170px;
 }
 
-/* Each university block */
+/* Individual gym card */
 .gym-card {
-  background-color: white;
   width: 450px;
-  border: 1px solid #ccc; /* border size and color */
-  border-radius: 10px; /* roundness of the border */
+  border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 20px;
-  background-color: #f9f9f9; /* color of the grid box */
+  background-color: #f9f9f9;
   text-align: center; 
 }
 
+/* Gym card images */
 .gym-card img {
-  margin: auto; /* to center the image */
-  border-radius: 8px; /* roundness of the imaage */
+  margin: auto;
+  border-radius: 8px;
 }
 
+/* Flex container for comparisons */
 .comparison-container {
     display: flex;
     gap: 20px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap;               /* wrap on small screens */
 }
 
+/* Gym card headings */
 .gym-card h2 {
     text-align: center;
     margin-bottom: 10px;
 }
 
+/* Joining fee text */
 .joining-fee {
     text-align: center;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
+/* =========================
+   TABLE STYLING
+   ========================= */
+
+/* Table layout */
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse;     /* remove double borders */
 }
 
+/* Table cells */
 th, td {
     border-bottom: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
 
+/* Table headers */
 th {
     background-color: #f0f0f0;
 }
+
+/* =========================
+   PAGE BACKGROUND
+   ========================= */
 .main{
-     background-image:linear-gradient(135deg,rgb(16, 94, 172) , rgb(231, 82, 181));
-    
-}
-form{                 /*login form grid*/
-    display:grid;
-   
-    padding:40px;
-    border:3px solid black;
-    margin-left:50px;
-    width: 45%;
-    margin:100px auto;
-    font-size:20px;
-    background-image:linear-gradient(to right, aqua,rgb(50, 50, 161));
-    border-radius:30px;
-    position:relative;
-    
+     background-image:linear-gradient(
+        135deg,
+        rgb(16, 94, 172),
+        rgb(231, 82, 181)
+     );
 }
 
+/* =========================
+   LOGIN FORM
+   ========================= */
+
+/* Login form container */
+form{
+    display:grid;                 /* grid layout */
+    padding:40px;
+    border:3px solid black;
+    width: 45%;
+    margin:100px auto;            /* center form */
+    font-size:20px;
+    background-image:linear-gradient(
+        to right,
+        aqua,
+        rgb(50, 50, 161)
+    );
+    border-radius:30px;
+    position:relative;
+}
+
+/* Image inside login form */
 form img{
    width:333px;
    position:absolute;
    top:1px;
-   bottom:1px;
    right:1px;
-   
 }
-input[type="text"], input[type="password"], select {        /*every input that takes text will be selected*/
+
+/* Text inputs & dropdowns */
+input[type="text"],
+input[type="password"],
+select {
     width:50%;
     font-size:15px;
-    
 }
-button{                      /*login button*/
+
+/* Login button */
+button{
     width:100px;
     border:none;
     border-radius:10px;
-    background-image:linear-gradient(to right,rgb(96, 96, 248),aqua);
+    background-image:linear-gradient(
+        to right,
+        rgb(96, 96, 248),
+        aqua
+    );
     font-size:20px;
     margin-left:5px;
 }
 
-
+/* Create account section */
 .create_account{
     padding:1px;
     margin-right:auto;
-    
 }
 
+/* =========================
+   COLLAPSIBLE LOGIN SECTION
+   ========================= */
+
+/* Hidden login content */
 #login {
     max-height: 0;
     overflow: hidden;
@@ -181,10 +242,13 @@ button{                      /*login button*/
     padding: 0 10px;
 }
 
+/* Expanded login content */
 #login.open {
-    max-height:400px; /* must be bigger than content height */
+    max-height:400px;
     padding: 100px;
 }
+
+/* General input styling */
 input{
     width:100%;
     padding:12px;
