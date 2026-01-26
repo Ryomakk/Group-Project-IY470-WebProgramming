@@ -7,7 +7,7 @@
     width:auto;
     height:58px;
     align-items: center;           /* vertically center items */
-    gap:1000px;                    /* space between items */
+   gap:1000px;                /* space between items */
     font-size:30px;
     color:white;
     padding:10px;
@@ -60,10 +60,6 @@ body{
   transition: 0.5s;               /* slide animation */
 }
 
-/* Hover effect for all links */
-a:hover{
-    text-shadow:2px 1px rgb(15, 5, 5);
-}
 
 /* =========================
    ACCOUNT / PROFILE SECTION
@@ -171,6 +167,7 @@ th {
         rgb(16, 94, 172),
         rgb(231, 82, 181)
      );
+     min-height: 100vh;
 }
 
 /* =========================
@@ -255,4 +252,10 @@ input{
     border:none;
     border-radius:10px;
     box-shadow:10px 10px;
+}
+
+/********SIGN UP PAGE CSS********/
+.signback{
+    background-image:linear-gradient(70deg,aqua,purple ) ;
+    min-height:100vh;
 }
