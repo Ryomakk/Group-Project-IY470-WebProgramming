@@ -1,21 +1,29 @@
-Hi everyone,
+# 🚀 Group Project Git Guide
 
-Please follow these steps exactly when working on our group project on GitHub.
-This keeps the project clean and avoids conflicts.
+Hey team! Follow this guide to keep our project clean and conflict-free.
 
 ---
 
-### STEP 1: Connect your fork to the main repo (DO THIS ONCE ONLY)
+### 🔗 1. One-Time Setup (Do This Once)
 
+Connect your fork to the main repository so you can sync updates:
 ```bash
 git remote add upstream https://github.com/FangZxuan/Group-Project-IY470-WebProgramming.git
 ```
+Verify it worked:
+```bash
+git remote -v
+```
+
+You should see both origin (your fork) and upstream (main repo).
 
 ---
 
-### STEP 2: Sync before starting any work (DO THIS EVERY TIME) 
-IF It does not work, try step 2 and step 3.
+### 🔄 2. Daily Workflow (Do This Every Time You Start Working)
 
+Step 1: Sync with Main Repository
+
+Always sync before starting work to avoid conflicts:
 ```bash
 git checkout main
 git fetch upstream
@@ -23,79 +31,101 @@ git merge upstream/main
 git push origin main
 ```
 
----
+💡 Tip: If this fails, make sure you're on the main branch first (git checkout main)
 
-### STEP 3: Create a new branch (REQUIRED)
+Step 2: Create & Switch to Your Branch
 
-❌ Never work on `main`
-
+Never work directly on main!
 ```bash
-git checkout -b name
+git checkout -b your-branch-name
 ```
 
-Example:
+Examples:
 ```bash
 git checkout -b homepage
+git checkout -b payment-page
+git checkout -b fix-navbar
 ```
 
----
+Step 3: Work & Commit
 
-### STEP 4: Do your assigned work
-
-* Edit files
-* Add files
-* Test your changes
-
----
-
-### STEP 5: Commit your changes
-
+Make your changes, then:
 ```bash
 git add .
-git commit -m "Short description of what you did"
+git commit -m "Clear description of what you changed"
 ```
 
-Example:
-
+Examples:
 ```bash
-git commit -m "Add homepage layout"
+git commit -m "Add payment confirmation modal"
+git commit -m "Fix responsive layout on mobile"
+git commit -m "Update database connection settings"
 ```
+
+Step 4: Push & Create Pull Request
+
+Push your branch to your fork:
+```bash
+git push origin your-branch-name
+```
+
+Then go to GitHub → your fork → Compare & pull request and create a PR to the main repo's main branch.
 
 ---
 
-### STEP 6: Push your branch to your fork
+### 📋 3. Useful Git Commands (Quick Reference)
+
+Branch Management
 
 ```bash
+# See all branches (* shows current branch)
+git branch
+
+# Create new branch and switch to it
+git checkout -b branch-name
+
+# Switch to existing branch
+git checkout branch-name
+
+# Delete local branch (after merging)
+git branch -d branch-name
+
+# Force delete branch (if not merged)
+git branch -D branch-name
+
+# Rename current branch
+git branch -m new-name
+Status & Navigation
+
+# Fetch updates from upstream (without merging)
+git fetch upstream
+
+# Push local branch to your fork
 git push origin branch-name
+
+# Delete remote branch
+git push origin --delete branch-name
+
+# Pull latest changes for current branch
+git pull origin branch-name
+Fixing Mistakes
+
+# Undo last commit but keep changes
+git reset --soft HEAD~1
+
+# Undo last commit and discard changes
+git reset --hard HEAD~1
+
+# Add file to previous commit
+git commit --amend --no-edit
+
+# Stash changes temporarily
+git stash
+
+# Get stashed changes back
+git stash pop
 ```
 
-If you don't know your branch name or what branch you are at - git branch (eg. *main, *blabla *mean the current branch)
-Example:
-
-```bash
-git push origin homepage(the branch name you are working on)
-```
 ---
 
-### STEP 7: Create a Pull Request (GitHub website)
-
-1. Go to **your fork**
-2. Click **Compare & pull request**
-3. Base repo → main project repo
-4. Base branch → `main`
-5. Head branch → your feature branch
-6. Click **Create Pull Request**
-
-Then wait for approval.
-
----
-
-### IMPORTANT RULES
-
-* ❌ Do NOT push to `main`
-* ✔ One task = one branch
-* ✔ Always sync before starting
-* ✔ Clear commit messages
-
----
-LETS GO GET 100% GUYS!!!
+LETS GO GET 100% GUYS!!! 🎉💪

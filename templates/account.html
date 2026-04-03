@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   
 <html lang="en">
     
 <head>
@@ -15,7 +15,7 @@
 
 </head>
 
-<body class = "main"> 
+<body class = "account_background"> 
 
     <div class="container" id="main"> 
         <a href="javascript:void(0)" style="color:white" onmouseover="toggleNav(); event.stopPropagation();">&#9776;</a> <!--hover bar-->
@@ -26,20 +26,21 @@
 
 </div>
 
-<form method ="post" action="#" id="login">
+<form method ="post" action="#" id="login" class="login_form">
     
     <label for="membership">Membership ID</label>
     <br>
-    <input type="text" id="membership" name="membership" style="max-width:300px;" placeholder="Enter your MembershipID" required>
+    <input type="text" class="membership" id="membership" name="membership" style="max-width:300px;" placeholder="Enter your MembershipID" required>
     <br>
 
     <label for="password">Password</label>
     <br>
-    <input type="password" id="password" name="pass_word" style="max-width:300px;" placeholder="Enter your password" pattern =".{5,10}" required>
+    <input type="password" class="password" id="password" name="pass_word" style="max-width:300px;" placeholder="Enter your password" pattern =".{5,10}" required> 
     <br>
     <button type="submit">Login</button>
     <br>
-    <a href="signup.html"><create_account" id="create" name="creation"  class="create_account" text-decoration="none" >Don't have an account ? Click here to create one! </a></label>
+    
+    <a href="signup.html"><label for="create_account" class="create_account" id="create" name="creation"  class="create_account" text-decoration="none" >Don't have an account ? Click here to create one! </a></label>
    
     <img class="gymbro" src="Photos/loginpage.jpg">
     

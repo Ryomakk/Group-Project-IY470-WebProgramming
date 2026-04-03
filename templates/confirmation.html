@@ -1,0 +1,428 @@
+
+<!--Hey Austin, after our page, it will redirect to your page. At the end of this code, there is a place where you can put the flask route there-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Basic page setup -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Page title shown in browser tab -->
+  <title>Payment Confirmation</title>
+
+  <!-- Main page stylesheet from Flask static folder -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmation.css') }}">
+
+  <!-- Font Awesome for payment icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+  <!-- Main page heading -->
+  <h1 class="heading">PAYMENT CONFIRMATION</h1>
+
+  <div class="page">
+    <!-- LEFT SIDE -->
+    <main class="left">
+
+      <!-- Top row: start date + payment plan -->
+      <section class="top-row">
+        <div class="startdate">
+          <label for="start-date">Choose a start date please</label>
+          <input type="date" id="start-date" name="start-date" />
+        </div>
+
+        <div class="plan-area">
+          <h2 class="section-title">Choose a payment plan</h2>
+
+          <!-- Payment plan options -->
+          <div class="plan-boxes">
+            <button class="small-card" type="button" data-plan="1 Month" data-months="1">1 Month</button>
+            <button class="small-card" type="button" data-plan="6 Months" data-months="6">6 Months</button>
+            <button class="small-card" type="button" data-plan="Yearly" data-months="12">Yearly</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category / ticket type selection -->
+      <section class="category">
+        <h2 class="section-title">Select Your Category</h2>
+
+        <div class="card-container">
+          <!-- Normal category -->
+          <div class="card" data-type="Normal">
+            <h3>Normal</h3>
+            <hr />
+            <ul class="card-feature">
+              <li>Must be 16 years old at least</li>
+              <li>Standard prices</li>
+              <li>Regular adult membership</li>
+            </ul>
+            <button class="btn" type="button">Choose</button>
+          </div>
+
+          <!-- Student category -->
+          <div class="card" data-type="Student">
+            <h3>Student (discount!!)</h3>
+            <hr />
+            <ul class="card-feature">
+              <li>Must be in university, college, or school</li>
+              <li>20% off at uGym</li>
+              <li>15% off at Power Zone</li>
+            </ul>
+            <button class="btn" type="button">Choose</button>
+          </div>
+
+          <!-- Pensioners category -->
+          <div class="card" data-type="Pensioners">
+            <h3>Pensioners (discount!!)</h3>
+            <hr />
+            <ul class="card-feature">
+              <li>Must age 66 and above in the UK</li>
+              <li>15% off at uGym</li>
+              <li>20% off at Power Zone</li>
+            </ul>
+            <button class="btn" type="button">Choose</button>
+          </div>
+        </div>
+
+        <!-- Invoice display area -->
+        <div class="details-box">
+          <h3><b>Invoice</b></h3>
+          <div class="detail-page" id="invoice-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- RIGHT SIDE -->
+    <aside class="right">
+      <h2 class="section-title">Summary</h2>
+
+      <div class="summary-box">
+        <!-- Summary values updated by JavaScript -->
+        <p><b>Start date:</b> <span id="sum-date">—</span></p>
+        <p><b>Plan:</b> <span id="sum-plan">—</span></p>
+        <p><b>Ticket type:</b> <span id="sum-type">—</span></p>
+        <p><b>End date:</b> <span id="sum-end-date">—</span></p>
+
+        <div class="payment-methods">
+          <p><b>Payment method:</b></p>
+
+          <!-- Payment method buttons -->
+          <div class="payment-options">
+            <button class="payment-btn" type="button"><i class="fa-solid fa-credit-card fa-2xl"></i></button>
+            <button class="payment-btn" type="button"><i class="fa-brands fa-google-pay fa-2xl"></i></button>
+            <button class="payment-btn" type="button"><i class="fa-brands fa-apple-pay fa-2xl"></i></button>
+            <button class="payment-btn" type="button"><i class="fa-brands fa-cc-paypal fa-2xl"></i></button>
+          </div>
+
+          <!-- Hidden payment details form -->
+          <div class="payment-details hidden" id="payment-details">
+            <p><b>Payment details:</b></p>
+
+            <label for="card-number">Card number</label>
+            <input type="text" id="card-number" placeholder="0123 4567 8912 3456" />
+
+            <label for="card-name">Card name</label>
+            <input type="text" id="card-name" placeholder="Name" />
+
+            <label for="exp-date">Exp date</label>
+            <input type="text" id="exp-date" placeholder="MM/YY" />
+
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" placeholder="012" />
+          </div>
+
+          <!-- Final payment button -->
+          <button class="pay-btn" id="pay-btn" type="button" disabled>Confirm Payment</button>
+        </div>
+      </div>
+    </aside>
+    <section id="confirmModal" class="modal hidden">
+    <div class="modal-box">
+    <h2> &#127881;Congratulations!&#127881;</h2>
+    <div id="modalContent"></div>
+    <button type="button" class="pay-btn" id="closeModalBtn">Go to Austin's page</button>
+  </div>
+</section>
+
+    <script>
+      // Wait until the page is fully loaded before running any JavaScript
+      document.addEventListener("DOMContentLoaded", () => {
+        // Summary fields on the right side
+        const dateInput = document.getElementById("start-date");
+        const sumDate = document.getElementById("sum-date");
+        const sumPlan = document.getElementById("sum-plan");
+        const sumType = document.getElementById("sum-type");
+        const sumEndDate = document.getElementById("sum-end-date");
+
+        // Button groups
+        const planButtons = document.querySelectorAll(".small-card");
+        const ticketCards = document.querySelectorAll(".card");
+        const paymentButtons = document.querySelectorAll(".payment-btn");
+
+        // Payment details area and invoice area
+        const paymentDetails = document.getElementById("payment-details");
+        const payBtn = document.getElementById("pay-btn");
+        const invoiceList = document.getElementById("invoice-list");
+        const confirmModal = document.getElementById("confirmModal");
+        const modalContent = document.getElementById("modalContent");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const cardNumberInput = document.getElementById("card-number");
+        const cardNameInput = document.getElementById("card-name");
+        const expDateInput = document.getElementById("exp-date");
+        const cvcInput = document.getElementById("cvc");
+
+        let paymentMethodSelected = false;
+
+        // Default selections
+        let selectedMonths = 1;
+        let selectedTicketType = "Normal";
+        sumType.textContent = "Normal";
+
+        // Make "1 Month" selected by default
+        const defaultPlanButton = document.querySelector('.small-card[data-months="1"]');
+        if (defaultPlanButton) {
+          defaultPlanButton.classList.add("selected");
+          sumPlan.textContent = defaultPlanButton.dataset.plan || "1 Month";
+        }
+
+        // Make "Normal" selected by default
+        const defaultCard = document.querySelector('.card[data-type="Normal"]');
+        if (defaultCard) {
+          defaultCard.classList.add("selected");
+        }
+
+        // Convert a Date object into DD/MM/YYYY format
+        function formatDateDMY(date) {
+          const d = String(date.getDate()).padStart(2, "0");
+          const m = String(date.getMonth() + 1).padStart(2, "0");
+          const y = date.getFullYear();
+          return `${d}/${m}/${y}`;
+        }
+
+        // Add a number of months to a date
+        function addMonths(date, months) {
+          const d = new Date(date);
+          const startDay = d.getDate();
+          d.setMonth(d.getMonth() + months);
+
+          // Handle month-end overflow safely
+          if (d.getDate() < startDay) d.setDate(0);
+
+          return d;
+        }
+
+        // Update membership end date based on start date + selected months
+        function updateEndDate() {
+          if (!dateInput.value || !selectedMonths) {
+            sumEndDate.textContent = "—";
+            return;
+          }
+
+          const start = new Date(dateInput.value);
+          const end = addMonths(start, selectedMonths);
+          sumEndDate.textContent = formatDateDMY(end);
+        }
+
+        // Return discount rate based on selected gym and category
+        function getDiscountRate(selectedGym, ticketType) {
+          if (ticketType === "Student") {
+            return selectedGym === "uGym" ? 0.20 : 0.15;
+          }
+
+          if (ticketType === "Pensioners") {
+            return selectedGym === "uGym" ? 0.15 : 0.20;
+          }
+
+          return 0;
+        }
+
+        // Massage and Physio should never be discounted
+        function isDiscountableItem(itemName) {
+          const name = itemName.toLowerCase();
+
+          if (name.includes("massage")) return false;
+          if (name.includes("physio")) return false;
+
+          return true;
+        }
+        
+         // random generator
+        function generateMembershipId() {
+        const random = Math.floor(100000 + Math.random() * 900000);
+        return `${random}`;
+        }
+    //pop up
+      function showConfirmationPopup() {
+        const membershipId = generateMembershipId();
+
+        modalContent.innerHTML = `
+          <div>Thank you very much for using our website. Your payment has been confirmed.</div>
+          <div><strong>Your Membership ID:</strong> ${membershipId}</div>
+          <div>Welcome to your new membership and do not forget the moto "better health,better mind, better quality of life"</div>`;
+
+        confirmModal.classList.remove("hidden");
+         }
+  // making sure that the user put in the card details 
+        function validatePaymentForm() {
+        const cardNumberFilled = cardNumberInput.value.trim() !== "";
+        const cardNameFilled = cardNameInput.value.trim() !== "";
+        const expDateFilled = expDateInput.value.trim() !== "";
+        const cvcFilled = cvcInput.value.trim() !== "";
+
+        const allFilled =
+          paymentMethodSelected &&
+          cardNumberFilled &&
+          cardNameFilled &&
+          expDateFilled &&
+          cvcFilled;
+
+        payBtn.disabled = !allFilled;
+      }
+
+        // Build and display the invoice using saved data from membership page
+        function renderInvoice() {
+          const raw = localStorage.getItem("invoiceData");
+
+          // If there is no saved invoice, show fallback text
+          if (!raw) {
+            invoiceList.innerHTML = "<div>No invoice data found.</div>";
+            return;
+          }
+
+          const invoiceData = JSON.parse(raw);
+
+          // Use selected plan months and selected ticket type
+          const months = selectedMonths || 1;
+          const discountRate = getDiscountRate(invoiceData.selectedGym, selectedTicketType);
+
+          let discountedMonthlyTotal = 0;
+          let discountAmount = 0;
+
+          let html = "";
+
+          // Basic membership details
+          html += `<div><strong>Gym:</strong> ${invoiceData.selectedGymLabel}</div>`;
+          html += `<div><strong>Access Type:</strong> ${invoiceData.gymAccess}</div>`;
+          html += `<div><strong>Extras:</strong> ${invoiceData.extras.length ? invoiceData.extras.join(", ") : "None"}</div>`;
+          html += `<div><strong>Ticket Type:</strong> ${selectedTicketType}</div>`;
+          html += `<div><strong>Payment Plan:</strong> ${months} month${months > 1 ? "s" : ""}</div>`;
+          html += `<hr class="invoice-divider">`;
+
+          // Render each invoice item and apply discount where allowed
+          for (let i = 0; i < invoiceData.items.length; i++) {
+            const item = invoiceData.items[i];
+            const originalPrice = Number(item.price);
+            let finalPrice = originalPrice;
+            let note = "";
+
+           
+
+            // Only discount valid items
+            if (isDiscountableItem(item.name) && discountRate > 0) {
+              finalPrice = originalPrice * (1 - discountRate);
+              note = ` (${Math.round(discountRate * 100)}% off)`;
+            }
+
+            discountedMonthlyTotal += finalPrice;
+            discountAmount += (originalPrice - finalPrice);
+
+            html += `<div><strong>${item.name}:</strong> £${finalPrice.toFixed(2)} / month${note}</div>`;
+          }
+
+          // Final totals
+          const planTotal = discountedMonthlyTotal * months;
+          const totalDueToday = planTotal + Number(invoiceData.joiningFee);
+
+          html += `<div><strong>Joining Fee:</strong> £${Number(invoiceData.joiningFee).toFixed(2)}</div>`;
+          html += `<div><strong>Monthly Discount:</strong> -£${discountAmount.toFixed(2)}</div>`;
+          html += `<div><strong>Plan Total:</strong> £${planTotal.toFixed(2)}</div>`;
+          html += `<div><strong>Total Amount (PLAN + Joining Fees):</strong> £${totalDueToday.toFixed(2)}</div>`;
+
+          // Show final invoice HTML
+          invoiceList.innerHTML = html;
+        }
+
+        // Show invoice immediately on page load
+        renderInvoice();
+
+        // Start date selection updates summary and end date
+        dateInput.addEventListener("change", () => {
+          sumDate.textContent = dateInput.value ? formatDateDMY(new Date(dateInput.value)) : "—";
+          updateEndDate();
+        });
+
+        // Payment plan selection updates selected plan, summary, end date, and invoice
+        planButtons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            planButtons.forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+            sumPlan.textContent = btn.dataset.plan || "—";
+            selectedMonths = parseInt(btn.dataset.months, 10) || null;
+            updateEndDate();
+            renderInvoice();
+          });
+        });
+
+        // Ticket type selection updates selected category and rerenders invoice
+        ticketCards.forEach(card => {
+          const chooseBtn = card.querySelector(".btn");
+          if (!chooseBtn) return;
+
+          chooseBtn.addEventListener("click", () => {
+            ticketCards.forEach(c => c.classList.remove("selected"));
+            card.classList.add("selected");
+
+            selectedTicketType = card.dataset.type || "Normal";
+            sumType.textContent = selectedTicketType;
+
+            renderInvoice();
+          });
+        });
+
+        // Payment method selection highlights the method and shows payment fields
+        paymentButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          paymentButtons.forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          paymentDetails.classList.remove("hidden");
+
+          paymentMethodSelected = true;
+          validatePaymentForm();
+        });
+      });
+      // input checkers for the input of the card details
+        cardNumberInput.addEventListener("input", validatePaymentForm);
+        cardNameInput.addEventListener("input", validatePaymentForm);
+        expDateInput.addEventListener("input", validatePaymentForm);
+        cvcInput.addEventListener("input", validatePaymentForm);
+        payBtn.addEventListener("click", () => {
+        if (!dateInput.value) {
+          alert("Please choose a start date.");
+          dateInput.focus();
+          return;
+        }
+
+        if (!cardNumberInput.value.trim() || !cardNameInput.value.trim() || !expDateInput.value.trim() || !cvcInput.value.trim()) {
+          alert("Please fill in all payment details.");
+          return;
+        }
+
+        showConfirmationPopup();
+      });
+        
+        //Austin's page button
+        //put it here man at this below
+
+
+
+
+        closeModalBtn.addEventListener("click", () => {
+        window.location.href = "/signup"; // here
+      });
+      });
+    </script>
+</body>
+</html>

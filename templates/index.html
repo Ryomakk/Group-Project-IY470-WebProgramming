@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-  <meta charset = "UTF-8">
-  <meta name = "viewport" content = "width=device-width, initial-scale=1">
-  <title> GYM</title>
-
-  <link rel="stylesheet" href="style1.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+<meta charset = "UTF-8">
+<meta name = "viewport" content = "width=device-width, initial-scale=1">
+<title> GYM</title>
+<link rel="stylesheet" href="static/css/index.css"> 
 </head>
+
   <body>
     <div id="home">
       <nav class = "navbar" >
         <!--logo section-->
           <div class = "logo">
-            <a href = "#">Cotswold</a>
+            <a href = "#home">Cotswold</a>
           </div> 
           <!--navigation-->
           <ul class = "menu">
-            <li> <a href = "#home"> Home </a></li><!--link to -->
-            <li> <a href = "#"> About </a></li><!--link to -->
-            <li> <a href = "#"> Gym Comparison</a></li><!--link to gym comparison page-->
-            <li> <a href = "#facility"> Facility</a></li><!--link to -->
-            <li> <a href = "#equipment"> Equipment</a></li><!--link to gym comparison page-->
-            <li> <a href = "#"> Login</a></li><!--link to Login page-->
+            <li> <a href = "{{url_for('membership')}}"> Gym Comparison</a></li><!--link to gym comparison page-->
+            <li> <a href = "{{url_for('signup')}}"> Sign up</a></li><!--link to gym comparison page-->
+            <li> <a href = "#facility"> Facility</a></li><!--link to the facility section -->
+            <li> <a href = "#equipment"> Equipment</a></li><!--link to equipment section-->
+            <li> <a href = "{{url_for('signup')}}"> Login</a></li><!--link to Login page-->
           </ul>
       </nav>
     </div>
-
-    
 
     <div class = "slider" >
       <div class="overlay"></div>
@@ -36,6 +31,8 @@
         <div class="slider-text">
           <h1>Train hard</h1>
           <p>Find the Gym That Fits You Best</p>
+          <a href="{{ url_for('membership') }}" class="button">COMPARE GYM</a>
+          
         </div>
           <img src="https://i.pinimg.com/736x/79/6d/bf/796dbf89150a2cc8991456b422dfe254.jpg" alt="gym-slide_1">
           <img src="https://i.pinimg.com/1200x/22/a1/bd/22a1bdb2c3af21e35d3709dfb7b2f8ef.jpg" alt="gym-slide_2">
@@ -43,7 +40,7 @@
           <img src="https://i.pinimg.com/1200x/73/de/f8/73def89200a0b351d89ff52af6407502.jpg" alt="gym-slide_4">
     </div>
 
-       
+    
 
   <!--facility section-->
     <section class="facility" id="facility">
@@ -51,7 +48,7 @@
         <p class="subtitle">Train, relax, and refresh in one place</p>
           
         <div class="facility-cards">
-          
+          <!--massage therapy-->
           <div class="card">
             <img src="https://i.pinimg.com/1200x/bb/0d/ff/bb0dff7adbd80c5ae3322f070bc562ed.jpg" alt="Massage_Therapy">
               <div class="card-content">
@@ -59,7 +56,7 @@
                 <p>Professional massage to support your recovery</p>
               </div>
           </div>
-          
+          <!--classes-->
           <div class="card">
             <img src="https://i.pinimg.com/736x/df/f0/7f/dff07f2b60074160e6de185404424c47.jpg" alt="Clases">
               <div class="card-content">
@@ -67,7 +64,7 @@
                 <p>Instructor-led group classes that build strength, confidence, and consistency.<p>
               </div>
           </div>
-          
+          <!--swimming pool-->
           <div class="card">
             <img src="https://i.pinimg.com/736x/73/6a/93/736a93ff20fc731e5b66e0d195a4c551.jpg" alt="Swimming_Pool">
               <div class="card-content">
@@ -75,7 +72,7 @@
                 <p>Modern pool for your comfort</p>
               </div>
           </div>
-
+          <!--physiotherapy-->
           <div class="card">
             <img src="https://i.pinimg.com/736x/98/b0/d5/98b0d53e454036cdb48549d910252ca1.jpg" alt="Physiotherapy">
               <div class="card-content">
@@ -87,7 +84,7 @@
         </div>
     </section>
 
-
+<!-- equipment -->
     <section class="equipment" id="equipment">
             <h2>Machines to Power Your Potential</h2>
             <p class="subtitle">State-of-the-art machines for every workout</p>
@@ -97,30 +94,31 @@
               <h3 class="group-title">Cardio </h3>
           
               <div class="equipment-slider">
+                <!--treadmill-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/d1/c2/f5/d1c2f546a01b04341bf5b4641d7055b2.jpg" alt="Treadmill">
                   <h4>Treadmill</h4>
                   <p>Perfect for cardio and endurance training.</p>
                 </div>
-          
+                <!--stationary bike-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/736x/b1/22/8c/b1228cdcae49781965f6eee477bbd4e1.jpg" alt="Stationary_Bike">
                   <h4>Stationary Bike</h4>
                   <p>Low-impact cardio for all levels.</p>
                 </div>
-
+                <!--elliptical trainer-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/2e/9d/0a/2e9d0a78b92f20fa653a2a8744409801.jpg" alt="Elliptical_Trainer">
                   <h4>Elliptical Trainer</h4>
                   <p>Ideal for low-impact cardio.</p>
                 </div>
-
+                 <!--rowing machine-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/20/f4/2e/20f42e833db562ce78af89b959b84ab0.jpg" alt="Rowing_Machine ">
                   <h4>Rowing Machine (Rower)</h4>
                   <p>Great for full-body cardio.</p>
                 </div>
-
+                 <!--stair climber-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/736x/94/2e/89/942e894703197ceea0843d2137e00a7f.jpg" alt="stair_climber">
                   <h4>Stair climber</h4>
@@ -132,38 +130,38 @@
             <!-- Strength -->
             <div class="equipment-group">
               <h3 class="group-title">Strength </h3>
-          
+             <!--bench press-->
               <div class="equipment-slider">
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/736x/6b/17/02/6b17020338985aeddc2f58d1764b0f72.jpg" alt="Bench_Press">
                   <h4>Bench Press</h4>
                   <p>Build upper body strength effectively.</p>
                 </div>
-          
+              <!--cable machine-->
                 <div class="equipment-card">
                   <img src="https://img.freepik.com/premium-photo/fit-woman-workout-dark-fitness-center-using-cable-crossover-machine-exercise-her-chest-arms-healthy-lifestyle-fitness-sport-concept_175682-35941.jpg" alt="Cable_Machine">
                   <h4>Cable Machine</h4>
                   <p>Perfect for versatile strength training.</p>
                 </div>
-
+                 <!--dumbbell-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/9c/29/a2/9c29a244cf1c34e6cac88369878dc56a.jpg" alt="Dumbells">
                   <h4>Dumbbell</h4>
                   <p>Improve overall muscle strength and endurance.</p>
                 </div>
-
+                  <!--shoulder press-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/474x/2e/ba/69/2eba69c5b6ef0946c04ad4f4a73ad5e5.jpg" alt="shoulder_press">
                   <h4>Shoulder Press</h4>
                   <p>It targets shoulders and triceps</p>
                 </div>
-
+                   <!--smith machine-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/a4/ca/f8/a4caf8bafe20978337b95d0259a33f98.jpg" alt="smith_machine">
                   <h4>Smith Machine</h4>
                   <p>It lets you lift weights safely to work different muscles</p>
                 </div>
-
+                    <!--leg press-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/cb/de/98/cbde9854d1aebef3d97b82e21bae4983.jpg" alt="leg_press">
                   <h4>Leg Press</h4>
@@ -179,24 +177,25 @@
               <h3 class="group-title">Other Equipment </h3>
           
               <div class="equipment-slider">
+                <!--balance ball-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/bd/43/c7/bd43c7baab0bdbeda770762f11675333.jpg" alt="Balance_Ball">
                   <h4>Balance Ball</h4>
                   <p>It mainly works your core</p>
                 </div>
-          
+                  <!--dipping belt-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/25/34/53/2534537c93ed83c312199161b9c64ffd.jpg" alt="Dipping_Belt">
                   <h4>Dipping Belt</h4>
                   <p>It strengthens chest, arms, and back.</p>
                 </div>
-
+                    <!--machine ball-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/1200x/69/f5/87/69f587da1610032813cef8edf4cdc486.jpg" alt="Medicine_Ball">
                   <h4>Medicine Ball</h4>
                   <p>It works your whole body, especially core and arms.</p>
                 </div>
-
+                 <!--resistance bands-->
                 <div class="equipment-card">
                   <img src="https://i.pinimg.com/474x/a5/23/d6/a523d6aa20f051b73107ee31353b4107.jpg" alt="Resistance_Bands">
                   <h4>Resistance Bands</h4>
@@ -208,13 +207,14 @@
           </section>
 
         <hr>
-
+        <!-- footer section -->
         <footer class="footer">
           <div class="footer-container">
 
             <div class="footer-section">
               <h2>Cotswold gym</h2>
-              <p></p>
+              <p>Train hard</p>
+              <p>Find the Gym that Fits You best</p>
             </div>
 
             <div class="footer-section">
@@ -225,7 +225,7 @@
             <div class="footer-section">
               <h3>Quick link</h3>
               <a href="#home">Home</a>
-              <a href="#">Gym comparison</a>
+              <a href="{{url_for('membership')}}">Gym comparison</a>
               <a href="#facility">Facility</a>
               <a href="#equipment">Equipment</a>
             </div>
@@ -235,17 +235,59 @@
               <p>Email: info@cotswoldgym.com</p>
               <p>Phone: 0123 4567 890</p>
               <p>Address: UWE Frenchay Campus, Cotswold</p>
-              <a href="#"><i class="fab fa-facebook"></i>Facebook</a> <!--social media icon is for the visual. It is not liked to real account.-->
-              <a href="#"><i class="fab fa-instagram"></i>Instagram</a> <!--social media icon is for the visual. It is not liked to real account.-->
-              <a href="#"><i class="fab fa-twitter"></i>Twitter</a> <!--social media icon is for the visual. It is not liked to real account.-->
-            </div>
+              <!-- From Uiverse.io by david-mohseni --> 
+              </div>
 
-            <div class="footer-botton">
+              <ul class="wrapper">
+                <li class="icon facebook">
+                  <span class="tooltip">Facebook</span>
+                  <svg
+                    viewBox="0 0 320 512"
+                    height="1.2em"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+                    ></path>
+                  </svg>
+                </li>
+                <li class="icon twitter">
+                  <span class="tooltip">Twitter</span>
+                  <svg
+                    height="1.8em"
+                    fill="currentColor"
+                    viewBox="0 0 48 48"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="twitter"
+                  >
+                    <path
+                      d="M42,12.429c-1.323,0.586-2.746,0.977-4.247,1.162c1.526-0.906,2.7-2.351,3.251-4.058c-1.428,0.837-3.01,1.452-4.693,1.776C34.967,9.884,33.05,9,30.926,9c-4.08,0-7.387,3.278-7.387,7.32c0,0.572,0.067,1.129,0.193,1.67c-6.138-0.308-11.582-3.226-15.224-7.654c-0.64,1.082-1,2.349-1,3.686c0,2.541,1.301,4.778,3.285,6.096c-1.211-0.037-2.351-0.374-3.349-0.914c0,0.022,0,0.055,0,0.086c0,3.551,2.547,6.508,5.923,7.181c-0.617,0.169-1.269,0.263-1.941,0.263c-0.477,0-0.942-0.054-1.392-0.135c0.94,2.902,3.667,5.023,6.898,5.086c-2.528,1.96-5.712,3.134-9.174,3.134c-0.598,0-1.183-0.034-1.761-0.104C9.268,36.786,13.152,38,17.321,38c13.585,0,21.017-11.156,21.017-20.834c0-0.317-0.01-0.633-0.025-0.945C39.763,15.197,41.013,13.905,42,12.429"
+                    ></path>
+                  </svg>
+                </li>
+                <li class="icon instagram">
+                  <span class="tooltip">Instagram</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1.2em"
+                    fill="currentColor"
+                    class="bi bi-instagram"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                    ></path>
+                  </svg>
+                </li>
+              </ul>
+
+            <div class="footer-bottom">
               <p>© 2026 Cotswold gym | All Rights Reserved. | We Do Gym Together.</p>
             </div>
 
           </div>   
         </footer>
   </body>
-    
 </html>
+

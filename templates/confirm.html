@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirm Your Membership</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f5f5f5;
+  }
+  .confirm-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  h1 { color: #333; margin-bottom: 30px; }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .label { color: #666; }
+  .value { font-weight: 600; color: #333; }
+  .price-total {
+    background: #f0f9ff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .price-total .amount {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0066cc;
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .back-btn { background: #e0e0e0; color: #333; }
+  .pay-btn { background: #0066cc; color: white; }
+</style>
+</head>
+<body>
+
+<div class="confirm-box">
+  <h1>✓ Confirm Your Selection</h1>
+  
+  <div class="detail-row">
+    <span class="label">Gym</span>
+    <span class="value" id="confirmGym">-</span>
+  </div>
+  
+  <div class="detail-row">
+    <span class="label">Access Type</span>
+    <span class="value" id="confirmType">-</span>
+  </div>
+  
+  <div class="detail-row">
+    <span class="label">Extras</span>
+    <span class="value" id="confirmExtras">-</span>
+  </div>
+  
+  <div class="detail-row">
+    <span class="label">Joining Fee</span>
+    <span class="value" id="confirmFee">-</span>
+  </div>
+  
+  <div class="price-total">
+    <div class="label">Monthly Payment</div>
+    <div class="amount" id="confirmPrice">£0.00</div>
+  </div>
+  
+  <div class="buttons">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <button class="pay-btn" onclick="completePayment()">Pay Now</button>
+  </div>
+</div>
+
+<script>
+  // Load data from previous page
+  const gym = localStorage.getItem('gymChoice');
+  const gymType = localStorage.getItem('gymType');
+  const extras = localStorage.getItem('extras');
+  const price = localStorage.getItem('monthlyPrice');
+  const fee = localStorage.getItem('joiningFee');
+
+  // Display it
+  document.getElementById('confirmGym').textContent = gym === 'uGym' ? 'uGym' : 'Power Zone';
+  document.getElementById('confirmType').textContent = gymType.charAt(0).toUpperCase() + gymType.slice(1);
+  document.getElementById('confirmExtras').textContent = extras;
+  document.getElementById('confirmFee').textContent = '£' + fee;
+  document.getElementById('confirmPrice').textContent = '£' + price;
+
+  function goBack() {
+    window.location.href = '/';
+  }
+
+  function completePayment() {
+    alert('Payment completed! Welcome to your new gym.');
+    // Clear the saved data
+    localStorage.clear();
+  }
+</script>
+
+</body>
+</html>
