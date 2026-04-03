@@ -11,7 +11,8 @@
     font-size:30px;
     color:white;
     padding:10px;
-    transition:0.33s;              /* smooth hover/size changes */
+    transition:0.33s; 
+            /* smooth hover/size changes */
 }
 
 /* Navbar links */
@@ -85,6 +86,7 @@ body{
 .Position-Account{
     font-size: 20px;
     color: rgb(240, 235, 235);
+    
 }
 
 /* =========================
@@ -161,13 +163,11 @@ th {
 /* =========================
    PAGE BACKGROUND
    ========================= */
-.main{
-     background-image:linear-gradient(
-        135deg,
-        rgb(16, 94, 172),
-        rgb(231, 82, 181)
-     );
-     min-height: 100vh;
+.account_background{
+     background-image:
+linear-gradient(152deg,rgba(52, 175, 252, 1) 20%, rgba(21, 23, 19, 1) 51%, rgba(52, 107, 245, 1) 75%, rgba(52, 219, 252, 1) 98%);
+
+min-height:100vh;
 }
 
 /* =========================
@@ -175,7 +175,7 @@ th {
    ========================= */
 
 /* Login form container */
-form{
+.login_form{
     display:grid;                 /* grid layout */
     padding:40px;
     border:3px solid black;
@@ -189,23 +189,36 @@ form{
     );
     border-radius:30px;
     position:relative;
+    
 }
 
 /* Image inside login form */
 form img{
-   width:333px;
+   max-width:333px;
    position:absolute;
    top:1px;
    right:1px;
+   
 }
 
 /* Text inputs & dropdowns */
-input[type="text"],
+
 input[type="password"],
 select {
-    width:50%;
-    font-size:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+.membership{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Login button */
 button{
@@ -245,17 +258,79 @@ button{
     padding: 100px;
 }
 
-/* General input styling */
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    box-shadow:10px 10px;
-}
+
+
 
 /********SIGN UP PAGE CSS********/
-.signback{
-    background-image:linear-gradient(70deg,aqua,purple ) ;
+.background-signup{
+    background-image: url("/static/Photos/gym.jpg");
+     background-size: 106% 100%;
+     background-repeat:no-repeat;
+    width: 100vw;
+     overflow-y: hidden; /* Hide vertical scrollbar */
+     overflow-x: hidden; /* Hide horizontal scrollbar */
     min-height:100vh;
+}
+.signup_container{
+    display:grid;                 /* grid layout */
+    min-height:500px;
+    min-width:500px;;
+    border:2px solid #ffffff33;
+    backdrop-filter:blur(13px);
+    box-shadow : 0 0 10px #0000001a;
+    width: 10%;
+    margin:130px auto;            /* center form */
+    font-size:30px;
+    background-color:white;
+    border-radius:30px;
+    position:relative;
+    overflow:hidden;
+    background:transparent;
+    padding:20px;
+    
+
+   
+}
+input[type="email"],
+select {
+    width:95%;
+    padding:15px;
+    border-radius:10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    justify-self:right;
+    margin-bottom:30px;
+    background:transparent;
+     border:2px solid #ffffff33;
+   
+}
+input[type="date"],
+select {
+    width:95%;
+    padding:10px;
+    border-radius:10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background:transparent;
+    margin-bottom:30px;
+    line-height:20px;
+     border:2px solid #ffffff33;
+   
+}
+input[type="submit"],select{
+    
+    border:none;
+    border-radius:20px;
+    font-size:20px;
+    height:50px;
+    width: 60%;       /* fixed width */
+  display: block;     /* ensure it’s block-level */
+  margin-left: auto;  /* push from left */
+  margin-right: auto; /* push from right */
+    
+   
+}
+.signn{
+    font-size:30px;
+    margin-bottom:30px;
+    text-align: center;
+    margin-top:20px;
 }
