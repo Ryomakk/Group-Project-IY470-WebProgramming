@@ -1,9 +1,11 @@
+/* Base reset - remove default margins and apply border-box for predictable sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Base typography and background - system font stack with slate background */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #f8fafc;
@@ -11,17 +13,18 @@ body {
   line-height: 1.6;
 }
 
-/* Age Gate */
+/* Full-screen age gate overlay - fixed position with semi-transparent backdrop */
 .age-gate {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
+/* Centered modal card for age verification - max-width prevents stretching */
 .age-box {
   background: white;
   padding: 40px;
@@ -29,117 +32,124 @@ body {
   text-align: center;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 
-.age-icon {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-  border-radius: 50%;
+/* Shared flex centering pattern used by icons and step numbers */
+.age-icon, .step-number, .result-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Circular blue icon for age gate - centered with auto margins */
+.age-icon {
+  width: 64px;
+  height: 64px;
+  background: #0ea5e9;
+  border-radius: 50%;
   margin: 0 auto 20px;
 }
 
-.age-icon svg {
+/* SVG sizing for icons inside circular containers - white color for contrast */
+.age-icon svg, .result-icon svg {
   width: 32px;
   height: 32px;
   color: white;
 }
 
+/* Typography grouping - headings with consistent margins */
 .age-box h2 {
   font-size: 24px;
   margin-bottom: 12px;
-  color: #1e293b;
 }
 
-.age-box h2 span {
-  background: linear-gradient(135deg, #0284c7, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Brand color accents - blue highlights for uGym elements and active states */
+.age-box h2 span, .option-card.active h4, .gym-card.ugym .amount {
+  color: #0284c7;
 }
 
-.age-box p {
+/* Muted text color - shared gray for descriptions, labels, and secondary info */
+.age-box p, .winner-text, .result-text p, .breakdown-title, .price-display .currency, 
+.price-display .period, .option-card p, .info-box p, .joining-fee-display, .reset-btn svg {
   color: #64748b;
-  margin-bottom: 24px;
 }
 
-.age-buttons {
+/* Flex row layouts - shared gap spacing for button groups */
+.age-buttons, .result-buttons {
   display: flex;
   gap: 12px;
   justify-content: center;
 }
 
+/* Base button styles - shared padding, radius, and hover transitions */
+.btn-primary, .btn-secondary, .select-btn, .btn-continue {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+/* Primary CTA - solid blue for affirmative actions (Yes, Continue) */
 .btn-primary {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  background: #0ea5e9;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+/* Blue hover states - shared between primary buttons and active service overlays */
+.btn-primary:hover, .service-card.active .overlay {
+  background: #0284c7;
 }
 
-.btn-secondary {
+/* Secondary/outline buttons - white with gray borders for neutral actions */
+.btn-secondary, .select-btn {
   background: white;
-  color: #64748b;
   border: 1px solid #e2e8f0;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
 }
 
-.btn-secondary:hover {
+/* Subtle hover backgrounds - shared tint for secondary buttons and reset */
+.btn-secondary:hover, .reset-btn:hover {
   background: #f1f5f9;
-  color: #475569;
 }
 
+/* Explicit text color for secondary buttons (not inherited in all browsers) */
+.btn-secondary {
+  color: #64748b;
+}
+
+/* Utility - force hide elements from view and accessibility tree */
 .hidden {
   display: none !important;
 }
 
-/* Hero */
+/* Hero banner - dual-layer background with gradient overlay for text readability */
 .hero {
   height: 350px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(40, 152, 200, 0.8) 50%, transparent 100%),
+  background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(40,152,200,0.8) 50%, transparent 100%), 
               url('/static/Photos/membership0.jpeg') center/cover;
   display: flex;
   align-items: center;
   padding: 0 40px;
-  margin-bottom: 100px;
+  margin-bottom: 100px; /* Space for overlapping panel below */
 }
 
+/* Main headline - large bold typography with tight line height */
 .hero-content h1 {
   font-size: 48px;
   font-weight: 800;
-  color: #1e293b;
   line-height: 1.2;
   margin-bottom: 12px;
 }
 
-.hero-content h1 span {
-  background: linear-gradient(135deg, #0284c7, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Subheadline - smaller text with muted color */
 .hero-content p {
-  color: #64748b;
   font-size: 18px;
 }
 
+/* Small uppercase badge - appears above main headline (e.g., "MEMBERSHIP PLANS") */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -152,150 +162,165 @@ body {
   margin-bottom: 16px;
 }
 
-/* Container */
-.container {
+/* Layout containers - max-width centering for consistent content width */
+.container, .result-content {
   max-width: 1100px;
   margin: 0 auto;
+}
+
+/* Main content padding - bottom padding prevents overlap with fixed result bar */
+.container {
   padding: 0 20px 100px;
 }
 
-/* Selection Panel */
-.panel {
+/* White card backgrounds - shared by panel, info box, and gym cards */
+.panel, .info-box, .gym-card {
   background: white;
   border-radius: 16px;
+}
+
+/* Main selection panel - negative margin creates overlap with hero image */
+.panel {
   padding: 32px;
   margin-top: -40px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border: 1px solid #e2e8f0;
 }
 
-.section-title {
+/* Section headers - flex layout with gap for step numbers or icons */
+.section-title, .compare-header {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
   margin-bottom: 16px;
 }
 
+/* Circular step badges - light blue background with darker text */
 .step-number {
   width: 32px;
   height: 32px;
   background: #e0f2fe;
   color: #0284c7;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 13px;
-  font-weight: 700;
 }
 
-/* Gym Access Options */
-.options-grid {
+/* CSS Grid layouts - shared gap spacing for option and service grids */
+.options-grid, .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
+}
+
+/* Responsive tier grid - auto-fit creates as many 180px columns as fit */
+.options-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   margin-bottom: 32px;
 }
 
-.option-card {
-  background: white;
-  border: 2px solid #e2e8f0;
+/* Interactive cards - shared positioning and transition for hover effects */
+.option-card, .service-card {
   border-radius: 12px;
-  padding: 16px;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s;
   position: relative;
+  cursor: pointer;
+  transition: all .2s;
 }
 
-.option-card:hover {
+/* Tier cards - bordered boxes with padding */
+.option-card {
+  border: 2px solid #e2e8f0;
+  padding: 16px;
+}
+
+/* Blue border highlights - shared hover state for interactive elements */
+.option-card:hover, .service-card:hover, .select-btn:hover {
   border-color: #0ea5e9;
 }
 
+/* Active tier state - blue border with subtle glow shadow */
 .option-card.active {
   border-color: #0ea5e9;
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 2px 8px rgba(14,165,233,0.15);
 }
 
-.option-card.active::after {
-  content: '';
+/* Absolute positioning - checkmarks in top-right corners */
+.option-card.active::after, .service-card .check {
   position: absolute;
   top: 12px;
   right: 12px;
+}
+
+/* Selected tier indicator - blue dot pseudo-element */
+.option-card.active::after {
+  content: '';
   width: 20px;
   height: 20px;
   background: #0ea5e9;
   border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
-  background-size: 12px;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
+/* Tier name typography */
 .option-card h4 {
   font-size: 15px;
   font-weight: 600;
-  color: #1e293b;
   margin-bottom: 4px;
 }
 
-.option-card.active h4 {
-  color: #0284c7;
-}
-
+/* Smaller muted text for tier restrictions */
 .option-card p {
   font-size: 12px;
-  color: #94a3b8;
 }
 
+/* Horizontal divider - subtle line between sections */
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+  background: #e2e8f0;
   margin: 24px 0;
 }
 
-/* Service Cards - Changed to 2x2 grid */
+/* Service grid - fixed 2-column layout for add-ons (swim, classes, etc.) */
 .services-grid {
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
 }
 
+/* Service cards - fixed height with overflow hidden for image clipping */
 .service-card {
   height: 110px;
-  border-radius: 12px;
   overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.2s;
 }
 
+/* Lift animation on hover - subtle Y translation */
 .service-card:hover {
   transform: translateY(-4px);
 }
 
+/* Background images - cover sizing fills entire card */
 .service-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Absolute positioning contexts - overlays, content, and badges inside cards */
+.service-card .overlay, .service-card .content, .service-card .check, .winner-badge {
+  position: absolute;
+}
+
+/* Gradient overlays - dark bottom-to-top for text contrast over images */
 .service-card .overlay {
-  position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.4));
-  transition: background 0.2s;
+  background: linear-gradient(to top, rgba(30,41,59,0.9), rgba(30,41,59,0.4));
+  transition: background .2s;
 }
 
+/* Active service overlay - blue gradient indicating selection */
 .service-card.active .overlay {
-  background: linear-gradient(to top, rgba(14, 165, 233, 0.9), rgba(6, 182, 212, 0.5));
+  background: linear-gradient(to top, rgba(14,165,233,0.9), rgba(6,182,212,0.5));
 }
 
+/* Service name positioning - anchored to bottom-left */
 .service-card .content {
-  position: absolute;
   bottom: 12px;
   left: 12px;
   display: flex;
@@ -306,10 +331,8 @@ body {
   font-size: 14px;
 }
 
+/* Checkmark circles - white background, hidden by default */
 .service-card .check {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   width: 22px;
   height: 22px;
   background: white;
@@ -319,76 +342,73 @@ body {
   justify-content: center;
 }
 
+/* Show checkmark when service is selected */
 .service-card.active .check {
   display: flex;
 }
 
+/* Blue checkmark icon inside white circle */
 .service-card .check svg {
   width: 14px;
   height: 14px;
   color: #0ea5e9;
 }
 
-/* Comparison Section */
+/* Price comparison section spacing */
 .compare-section {
   margin-top: 40px;
 }
 
+/* Comparison header - space-between pushes title and winner text apart */
 .compare-header {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
 
+/* Typography grouping - large bold headings and prices */
+.compare-header h2, .price-display .amount {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Flex alignment for header with icon */
 .compare-header h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 22px;
-  font-weight: 700;
-  color: #1e293b;
 }
 
+/* Blue icon color in comparison header */
 .compare-header h2 svg {
   color: #0ea5e9;
 }
 
-.winner-text {
-  font-size: 14px;
-  color: #64748b;
-}
-
-.winner-text strong {
+/* Green accents - winner text and free items in price breakdown */
+.winner-text strong, .breakdown-list .item-price.free {
   color: #22c55e;
 }
 
-/* Gym Cards */
+/* Side-by-side gym cards - responsive grid with minimum width */
 .compare-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
+/* Gym card styling - larger radius, shadow, and transparent border reserve */
 .gym-card {
-  background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border: 2px solid transparent;
-  transition: all 0.3s;
+  transition: border-color .3s;
 }
 
+/* Winner state - green border for cheapest option */
 .gym-card.winner {
   border-color: #22c55e;
-  animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.3); }
-  50% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
-}
-
+/* Selected states - brand-specific border colors */
 .gym-card.selected {
   border-color: #0ea5e9;
 }
@@ -397,35 +417,39 @@ body {
   border-color: #475569;
 }
 
+/* Card headers - white text on colored backgrounds */
 .gym-header {
   padding: 24px;
   color: white;
 }
 
+/* Brand-specific header colors */
 .gym-card.ugym .gym-header {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  background: #0ea5e9;
 }
 
 .gym-card.powerzone .gym-header {
-  background: linear-gradient(135deg, #475569, #334155);
+  background: #475569;
 }
 
+/* Gym name in header */
 .gym-header h3 {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
+/* Subtitle in header with slight transparency */
 .gym-header p {
-  opacity: 0.85;
+  opacity: .9;
   font-size: 13px;
 }
 
+/* Floating badge - positioned above card edge with negative top */
 .winner-badge {
-  position: absolute;
   top: -60px;
   right: 16px;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: #22c55e;
   color: white;
   padding: 10px 14px;
   border-radius: 20px;
@@ -436,63 +460,62 @@ body {
   gap: 6px;
 }
 
+/* Trophy icon in winner badge */
 .winner-badge svg {
   width: 14px;
   height: 14px;
 }
 
+/* Card body padding and positioning context for absolute badge */
 .gym-body {
   padding: 28px;
   position: relative;
 }
 
+/* Price display - centered alignment with vertical rhythm */
 .price-display {
   text-align: center;
   margin-bottom: 24px;
 }
 
+/* Currency symbol - smaller and raised above baseline */
 .price-display .currency {
   font-size: 24px;
-  color: #94a3b8;
   vertical-align: top;
 }
 
+/* Main price number - very large for emphasis */
 .price-display .amount {
   font-size: 56px;
-  font-weight: 800;
-  color: #1e293b;
   line-height: 1;
 }
 
-.gym-card.ugym .amount {
-  background: linear-gradient(135deg, #0284c7, #06b6d4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Interval label spacing */
 .price-display .period {
-  color: #94a3b8;
   font-size: 14px;
   margin-top: 4px;
 }
 
+/* Itemized pricing container */
 .breakdown {
   margin-bottom: 24px;
 }
 
+/* Section label - small uppercase with letter spacing */
 .breakdown-title {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #94a3b8;
+  letter-spacing: .5px;
   margin-bottom: 12px;
 }
 
+/* Remove default list styling */
 .breakdown-list {
   list-style: none;
 }
 
+/* Individual line items - flex separates label from price */
 .breakdown-list li {
   display: flex;
   justify-content: space-between;
@@ -501,74 +524,72 @@ body {
   border-bottom: 1px solid #f1f5f9;
 }
 
+/* Remove border from final item */
 .breakdown-list li:last-child {
   border-bottom: none;
 }
 
-.breakdown-list .item-name {
-  color: #64748b;
-}
-
+/* Price values - bold weight for emphasis */
 .breakdown-list .item-price {
   font-weight: 600;
-  color: #1e293b;
 }
 
-.breakdown-list .item-price.free {
-  color: #22c55e;
+/* Joining fee notice - italic text with subtle background */
+.joining-fee-display {
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 12px;
+  padding: 8px;
+  background: #f1f5f9;
+  border-radius: 6px;
 }
 
+/* Select Plan button - full width with border */
 .select-btn {
   width: 100%;
   padding: 14px;
-  border-radius: 12px;
   border: 2px solid #e2e8f0;
-  background: white;
   color: #64748b;
   font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
+/* Blue text on hover */
 .select-btn:hover {
-  border-color: #0ea5e9;
   color: #0ea5e9;
 }
 
+/* Selected state fills - brand-specific solid colors */
 .gym-card.ugym .select-btn.selected {
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-  border-color: transparent;
+  background: #0ea5e9;
+  border-color: #0ea5e9;
   color: white;
 }
 
 .gym-card.powerzone .select-btn.selected {
-  background: linear-gradient(135deg, #475569, #334155);
-  border-color: transparent;
+  background: #475569;
+  border-color: #475569;
   color: white;
 }
 
-/* Info Box */
+/* Info box - centered text with border */
 .info-box {
   margin-top: 32px;
-  background: white;
-  border-radius: 12px;
   padding: 20px;
   text-align: center;
   border: 1px solid #e2e8f0;
 }
 
 .info-box p {
-  color: #64748b;
   font-size: 13px;
   line-height: 1.8;
 }
 
-/* Result Bar - Moved down */
+/* Fixed bottom bar - positioned at viewport bottom, hidden by default */
 .result-bar {
   position: fixed;
   bottom: 0;
@@ -577,82 +598,67 @@ body {
   background: white;
   border-top: 1px solid #e2e8f0;
   padding: 16px 24px;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
   z-index: 100;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
+  transform: translateY(100%); /* Slides down below viewport */
+  transition: transform .3s;
 }
 
+/* Visible state - slides up into view when gym selected */
 .result-bar.visible {
   transform: translateY(0);
 }
 
+/* Result bar inner layout - flex with space between icon/text and buttons */
 .result-content {
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* Left side grouping - icon and text side by side */
 .result-left {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
+/* Blue square icon in result bar */
 .result-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+  background: #0ea5e9;
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
+/* Smaller SVG in result icon */
 .result-icon svg {
   width: 24px;
   height: 24px;
-  color: white;
 }
 
-.result-text p {
-  color: #94a3b8;
-  font-size: 13px;
-}
-
+/* Selected plan name in result bar */
 .result-text h4 {
-  color: #1e293b;
   font-size: 18px;
   font-weight: 700;
 }
 
-.result-buttons {
-  display: flex;
-  gap: 12px;
-}
-
+/* Continue button - green solid with flex alignment */
 .btn-continue {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
+  background: #22c55e;
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: transform 0.2s;
 }
 
+/* Darker green on hover */
 .btn-continue:hover {
-  transform: translateY(-2px);
+  background: #16a34a;
 }
 
-/* Reset Button */
+/* Reset button - fixed position top-right, circular */
 .reset-btn {
   position: fixed;
   top: 16px;
@@ -666,57 +672,12 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 50;
-  transition: all 0.2s;
 }
 
-.reset-btn:hover {
-  background: #f1f5f9;
-  transform: rotate(180deg);
-}
-
+/* Gray refresh icon */
 .reset-btn svg {
   width: 20px;
   height: 20px;
-  color: #94a3b8;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero {
-    height: 280px;
-    padding: 0 20px;
-  }
-  
-  .hero-content h1 {
-    font-size: 32px;
-  }
-  
-  .panel {
-    padding: 20px;
-    margin-top: -20px;
-  }
-  
-  .options-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .services-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .compare-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .result-content {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-  }
-  
-  .result-left {
-    flex-direction: column;
-  }
 }

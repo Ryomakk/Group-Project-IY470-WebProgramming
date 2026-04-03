@@ -1,217 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gym Membership Comparison</title>
-<link rel="stylesheet" href="static/css/membership.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Membership Comparison</title>
+  <!-- Main stylesheet containing all component styles -->
+  <link rel="stylesheet" href="static/css/membership.css">
 </head>
 <body>
 
-<!-- Age Gate -->
-<div class="age-gate" id="ageGate">
-  <div class="age-box">
-    <div class="age-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <h2>Age <span>Verification</span></h2>
-    <p>You must be at least 16 years old to access this website.<br>Please verify your age to continue.</p>
-    <div class="age-buttons">
-      <button class="btn-primary" onclick="verifyAge()">I am Over 16</button>
-      <button class="btn-secondary" onclick="cancelAge()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- Reset Button -->
-<button class="reset-btn" onclick="resetAll()" title="Reset all selections">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/></svg>
-</button>
-
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="badge">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-      Smart Comparison
-    </div>
-    <h1>Compare Gym<br><span>Memberships</span></h1>
-    <p>Clear pricing. Smarter choices. Find the perfect membership.</p>
-  </div>
-</section>
-
-<!-- Main Content -->
-<div class="container">
-  
-  <!-- Selection Panel -->
-  <div class="panel">
-    <!-- Gym Access -->
-    <div class="section-title">
-      <div class="step-number">01</div>
-      Select Gym Access
-    </div>
-    <div class="options-grid" id="gymOptions">
-      <div class="option-card active" data-type="none" onclick="selectGymType('none')">
-        <h4>No Gym Access</h4>
-        <p>Extras only</p>
+  <!-- Age Verification Gate - Full screen modal blocks access until user confirms 16+ -->
+  <div class="age-gate" id="ageGate">
+    <div class="age-box">
+      <!-- Shield icon indicating security/verification -->
+      <div class="age-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
       </div>
-      <div class="option-card" data-type="super" onclick="selectGymType('super')">
-        <h4>Super Off-Peak</h4>
-        <p>10am - 12pm & 2pm - 4pm</p>
-      </div>
-      <div class="option-card" data-type="off" onclick="selectGymType('off')">
-        <h4>Off-Peak</h4>
-        <p>12pm - 2pm & 8pm - 11pm</p>
-      </div>
-      <div class="option-card" data-type="any" onclick="selectGymType('any')">
-        <h4>Anytime</h4>
-        <p>24/7 unlimited access</p>
-      </div>
-    </div>
-    
-    <div class="divider"></div>
-    
-    <!-- Extras -->
-    <div class="section-title">
-      <div class="step-number">02</div>
-      Add Extras
-    </div>
-    <div class="services-grid" id="services">
-      <div class="service-card" data-service="Swimming" onclick="toggleService('Swimming')">
-        <img src="/static/Photos/membership1.jpg" alt="Swimming">
-        <div class="overlay"></div>
-        <div class="content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M2 12c0-5 4-9 9-9s9 4 9 9M2 12c0 5 4 9 9 9s9-4 9-9"/></svg>
-          Swimming
-        </div>
-        <div class="check">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-      </div>
-      <div class="service-card" data-service="Classes" onclick="toggleService('Classes')">
-        <img src="/static/Photos/membership2.avif" alt="Classes">
-        <div class="overlay"></div>
-        <div class="content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Classes
-        </div>
-        <div class="check">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-      </div>
-      <div class="service-card" data-service="Massage" onclick="toggleService('Massage')">
-        <img src="/static/Photos/membership3.jpg" alt="Massage">
-        <div class="overlay"></div>
-        <div class="content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Massage
-        </div>
-        <div class="check">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-      </div>
-      <div class="service-card" data-service="Physio" onclick="toggleService('Physio')">
-        <img src="/static/Photos/membership4.jpeg" alt="Physio">
-        <div class="overlay"></div>
-        <div class="content">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Physio
-        </div>
-        <div class="check">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
+      <h2>Age <span>Verification</span></h2>
+      <p>You must be at least 16 years old to access this website.<br>Please verify your age to continue.</p>
+      
+      <!-- Action buttons: Primary (confirm) and Secondary (cancel) -->
+      <div class="age-buttons">
+        <button class="btn-primary" onclick="verifyAge()">I am Over 16</button>
+        <button class="btn-secondary" onclick="cancelAge()">Cancel</button>
       </div>
     </div>
   </div>
-  
-  <!-- Comparison Section -->
-  <div class="compare-section">
-    <div class="compare-header">
-      <h2>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-        Compare Plans
-      </h2>
-      <div class="winner-text" id="winnerText"></div>
+
+  <!-- Floating Reset Button - Fixed position top-right, allows user to clear all selections -->
+  <button class="reset-btn" onclick="resetAll()" title="Reset all selections">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3"/>
+    </svg>
+  </button>
+
+  <!-- Hero Section - Gradient background with headline and value proposition -->
+  <section class="hero">
+    <div class="hero-content">
+      <!-- Small uppercase badge above main headline -->
+      <div class="badge">Smart Comparison</div>
+      <h1>Compare Gym<br><span>Memberships</span></h1>
+      <p>Clear pricing. Smarter choices. Find the perfect membership.</p>
     </div>
+  </section>
+
+  <!-- Main Content Container - Centers content and provides consistent width -->
+  <div class="container">
     
-    <div class="compare-grid">
-      <!-- uGym Card -->
-      <div class="gym-card ugym" id="uGymCard">
-        <div class="gym-header">
-          <h3>uGym</h3>
+    <!-- Selection Panel - White card overlapping hero bottom -->
+    <div class="panel">
+      
+      <!-- Step 1: Gym Access Tier Selection -->
+      <div class="section-title">
+        <div class="step-number">01</div>
+        Select Gym Access
+      </div>
+      
+      <!-- Tier Options Grid - 4 cards: None, Super Off-Peak, Off-Peak, Anytime -->
+      <div class="options-grid" id="gymOptions">
+        <!-- Default selected option for extras-only pricing -->
+        <div class="option-card active" data-type="none" onclick="selectGymType('none')">
+          <h4>No Gym Access</h4>
+          <p>Extras only</p>
         </div>
-        <div class="gym-body">
-          <div class="price-display">
-            <span class="currency">£</span>
-            <span class="amount" id="uPrice">0.00</span>
-            <div class="period">per month</div>
-          </div>
-          <div class="breakdown">
-            <div class="breakdown-title">Price Breakdown</div>
-            <ul class="breakdown-list" id="uBreakdown">
-              <li><span class="item-name">Gym access</span><span class="item-price">£0</span></li>
-            </ul>
-          </div>
-          <button class="select-btn" id="uSelectBtn" onclick="selectGym('uGym')">
-            Select Plan
-          </button>
+        <!-- Mid-day restricted access option -->
+        <div class="option-card" data-type="super" onclick="selectGymType('super')">
+          <h4>Super Off-Peak</h4>
+          <p>10am - 12pm & 2pm - 4pm</p>
+        </div>
+        <!-- Lunch and evening restricted access -->
+        <div class="option-card" data-type="off" onclick="selectGymType('off')">
+          <h4>Off-Peak</h4>
+          <p>12pm - 2pm & 8pm - 11pm</p>
+        </div>
+        <!-- Unlimited 24/7 access option -->
+        <div class="option-card" data-type="any" onclick="selectGymType('any')">
+          <h4>Anytime</h4>
+          <p>24/7 unlimited access</p>
         </div>
       </div>
       
-      <!-- Power Zone Card -->
-      <div class="gym-card powerzone" id="pGymCard">
-        <div class="gym-header">
-          <h3>Power Zone</h3>
+      <!-- Visual divider between sections -->
+      <div class="divider"></div>
+      
+      <!-- Step 2: Add-on Services Selection -->
+      <div class="section-title">
+        <div class="step-number">02</div>
+        Add Extras
+      </div>
+      
+      <!-- Services Grid - 2x2 layout with background images and overlays -->
+      <div class="services-grid" id="services">
+        <!-- Swimming pool add-on with checkmark indicator -->
+        <div class="service-card" data-service="Swimming" onclick="toggleService('Swimming')">
+          <img src="/static/Photos/membership1.jpg" alt="Swimming">
+          <div class="overlay"></div>
+          <div class="content">Swimming</div>
+          <div class="check">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
         </div>
-        <div class="gym-body">
-          <div class="price-display">
-            <span class="currency">£</span>
-            <span class="amount" id="pPrice">0.00</span>
-            <div class="period">per month</div>
+        
+        <!-- Fitness classes add-on -->
+        <div class="service-card" data-service="Classes" onclick="toggleService('Classes')">
+          <img src="/static/Photos/membership2.avif" alt="Classes">
+          <div class="overlay"></div>
+          <div class="content">Classes</div>
+          <div class="check">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </div>
-          <div class="breakdown">
-            <div class="breakdown-title">Price Breakdown</div>
-            <ul class="breakdown-list" id="pBreakdown">
-              <li><span class="item-name">Gym access</span><span class="item-price">£0</span></li>
-            </ul>
+        </div>
+        
+        <!-- Massage therapy add-on -->
+        <div class="service-card" data-service="Massage" onclick="toggleService('Massage')">
+          <img src="/static/Photos/membership3.jpg" alt="Massage">
+          <div class="overlay"></div>
+          <div class="content">Massage</div>
+          <div class="check">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </div>
-          <button class="select-btn" id="pSelectBtn" onclick="selectGym('powerZone')">
-            Select Plan
-          </button>
+        </div>
+        
+        <!-- Physiotherapy add-on -->
+        <div class="service-card" data-service="Physio" onclick="toggleService('Physio')">
+          <img src="/static/Photos/membership4.jpeg" alt="Physio">
+          <div class="overlay"></div>
+          <div class="content">Physio</div>
+          <div class="check">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
+    
+    <!-- Price Comparison Section - Side by side gym pricing cards -->
+    <div class="compare-section">
+      <!-- Header with title and dynamic winner text showing savings -->
+      <div class="compare-header">
+        <h2>
+          <!-- Scale/balance icon representing comparison -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/>
+            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+          Compare Plans
+        </h2>
+        <!-- Dynamic text injected by JS showing which gym is cheaper -->
+        <div class="winner-text" id="winnerText"></div>
+      </div>
+      
+      <!-- Comparison Grid - Two responsive cards for uGym vs Power Zone -->
+      <div class="compare-grid">
+        <!-- uGym Pricing Card - Blue brand colors -->
+        <div class="gym-card ugym" id="uGymCard">
+          <div class="gym-header">
+            <h3>uGym</h3>
+          </div>
+          <div class="gym-body">
+            <!-- Large price display with pound symbol and monthly interval -->
+            <div class="price-display">
+              <span class="currency">£</span>
+              <span class="amount" id="uPrice">0.00</span>
+              <div class="period">per month</div>
+            </div>
+            
+            <!-- Itemized breakdown list showing base + extras costs -->
+            <div class="breakdown">
+              <div class="breakdown-title">Price Breakdown</div>
+              <ul class="breakdown-list" id="uBreakdown">
+                <li><span class="item-name">Gym access</span><span class="item-price">£0</span></li>
+              </ul>
+            </div>
+            
+            <!-- Selection button - triggers selection and shows result bar -->
+            <button class="select-btn" id="uSelectBtn" onclick="selectGym('uGym')">
+              Select Plan
+            </button>
+          </div>
+        </div>
+        
+        <!-- Power Zone Pricing Card - Slate/dark brand colors -->
+        <div class="gym-card powerzone" id="pGymCard">
+          <div class="gym-header">
+            <h3>Power Zone</h3>
+          </div>
+          <div class="gym-body">
+            <div class="price-display">
+              <span class="currency">£</span>
+              <span class="amount" id="pPrice">0.00</span>
+              <div class="period">per month</div>
+            </div>
+            <div class="breakdown">
+              <div class="breakdown-title">Price Breakdown</div>
+              <ul class="breakdown-list" id="pBreakdown">
+                <li><span class="item-name">Gym access</span><span class="item-price">£0</span></li>
+              </ul>
+            </div>
+            <button class="select-btn" id="pSelectBtn" onclick="selectGym('powerZone')">
+              Select Plan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Info Footer - Additional terms and conditions -->
+    <div class="info-box">
+      <p>All memberships include access to locker rooms, showers, and basic amenities.<br>Prices shown are monthly and exclude any joining fees.</p>
+    </div>
+    
   </div>
-  
-  <!-- Info Box -->
-  <div class="info-box">
-    <p>All memberships include access to locker rooms, showers, and basic amenities.<br>Prices shown are monthly and exclude any joining fees.</p>
-  </div>
-  
-</div>
 
-<!-- Result Bar -->
-<div class="result-bar" id="resultBar">
-  <div class="result-content">
-    <div class="result-left">
-      <div class="result-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <!-- Fixed Result Bar - Slides up from bottom when user selects a gym -->
+  <div class="result-bar" id="resultBar">
+    <div class="result-content">
+      <!-- Left side: Checkmark icon and selection summary -->
+      <div class="result-left">
+        <div class="result-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="result-text">
+          <p>Your Selection</p>
+          <!-- Dynamic gym name populated by JS -->
+          <h4 id="selectedGymName">uGym Membership</h4>
+        </div>
       </div>
-      <div class="result-text">
-        <p>Your Selection</p>
-        <h4 id="selectedGymName">uGym Membership</h4>
+      
+      <!-- Right side: Reset and Continue action buttons -->
+      <div class="result-buttons">
+        <button class="btn-secondary" onclick="resetAll()">Reset</button>
+        <button class="btn-continue" onclick="continueToConfirm()">
+          Continue
+          <!-- Arrow right icon indicating progression -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </button>
       </div>
-    </div>
-    <div class="result-buttons">
-      <button class="btn-secondary" onclick="resetAll()">Reset</button>
-      <button class="btn-continue" onclick="continueToConfirm()">
-        Continue
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </button>
     </div>
   </div>
-</div>
-<script src="static/js/membership.js"></script>
+
+  <!-- Application logic for price calculation and interactions -->
+  <script src="static/js/membership.js"></script>
 </body>
 </html>

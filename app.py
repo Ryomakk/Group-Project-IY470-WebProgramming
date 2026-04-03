@@ -14,6 +14,10 @@ os.makedirs('data', exist_ok=True)
 def index():
     return render_template('membership.html')
 
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/confirm')
 def confirm():
     return render_template('confirmation.html')
