@@ -79,6 +79,7 @@ body {
 .age-buttons, .result-buttons {
   display: flex;
   gap: 12px;
+  margin: 20px;
   justify-content: center;
 }
 
