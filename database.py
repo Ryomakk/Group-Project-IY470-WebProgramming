@@ -14,9 +14,23 @@ DB_CONFIG = {
 
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
+@app.route("/")
+def index():
+    return render_template('index.html')
+@app.route('/membership')
+def membership():
+    return render_template('membership.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/confirm')
+def confirm():
+    return render_template('confirmation.html')
 
 # Serve the signup page
-@app.route("/")
+@app.route("/account.html")
 def account_page():
     return render_template("account.html")
  #  this file is in "templates" folder
