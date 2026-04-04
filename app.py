@@ -4,7 +4,14 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+
+@app.route('/membership')
+def membership():
     return render_template('membership.html')
+
+
 
 @app.route('/signup')
 def signup():
