@@ -1,4 +1,4 @@
-<!DOCTYPE html>   
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,9 +17,11 @@
                     <label for="membership">Email or Membership ID</label>
                 </div>
                 
-                <div class="input-container">
+                <!-- Password with eye icon -->
+                <div class="input-container password-wrapper">
                     <input type="password" id="password" name="pass_word" placeholder=" " pattern=".{8,10}" required>
                     <label for="password">Password</label>
+                    <span id="eyeIcon" onclick="togglePassword()">👁️</span>
                 </div>
                 
                 <button type="submit">Login</button>
@@ -32,9 +34,23 @@
     </div>
 
 <script>
+    // Expand form animation on load
     document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("login").classList.add("open");
     });
+    
+    // Toggle password visibility
+    function togglePassword() {
+        var pwd = document.getElementById("password");
+        var icon = document.getElementById("eyeIcon");
+        if (pwd.type === "password") {
+            pwd.type = "text";
+            icon.textContent = "🙈";
+        } else {
+            pwd.type = "password";
+            icon.textContent = "👁️";
+        }
+    }
 </script>
 </body>
 </html>

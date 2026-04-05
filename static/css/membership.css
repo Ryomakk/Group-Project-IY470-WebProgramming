@@ -13,70 +13,32 @@ body {
   line-height: 1.6;
 }
 
-/* Full-screen age gate overlay - fixed position with semi-transparent backdrop */
-.age-gate {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-/* Centered modal card for age verification - max-width prevents stretching */
-.age-box {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
-
 /* Shared flex centering pattern used by icons and step numbers */
-.age-icon, .step-number, .result-icon {
+.step-number, .result-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Circular blue icon for age gate - centered with auto margins */
-.age-icon {
-  width: 64px;
-  height: 64px;
-  background: #0ea5e9;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-}
-
-/* SVG sizing for icons inside circular containers - white color for contrast */
-.age-icon svg, .result-icon svg {
+.result-icon svg {
   width: 32px;
   height: 32px;
   color: white;
 }
 
-/* Typography grouping - headings with consistent margins */
-.age-box h2 {
-  font-size: 24px;
-  margin-bottom: 12px;
-}
-
 /* Brand color accents - blue highlights for uGym elements and active states */
-.age-box h2 span, .option-card.active h4, .gym-card.ugym .amount {
+.option-card.active h4, .gym-card.ugym .amount {
   color: #0284c7;
 }
 
 /* Muted text color - shared gray for descriptions, labels, and secondary info */
-.age-box p, .winner-text, .result-text p, .breakdown-title, .price-display .currency, 
+.winner-text, .result-text p, .breakdown-title, .price-display .currency, 
 .price-display .period, .option-card p, .info-box p, .joining-fee-display, .reset-btn svg {
   color: #64748b;
 }
 
 /* Flex row layouts - shared gap spacing for button groups */
-.age-buttons, .result-buttons {
+  .result-buttons {
   display: flex;
   gap: 12px;
   margin: 20px;

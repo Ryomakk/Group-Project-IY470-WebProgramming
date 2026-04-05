@@ -12,28 +12,26 @@
     <form action="{{ url_for('signup') }}" method="post" class="signup_form">
         <header class="signn">Sign Up</header>
 
-        <div class="email_input">
+        <div class="input_field">
             <input type="email" id="email" name="email" placeholder=" " required>
             <label for="email">Email</label>
         </div>
 
-        <div class="Fname_input">
+        <div class="input_field">
             <input type="text" id="fname" name="fname" placeholder=" " required>
             <label for="fname">First Name</label>    
         </div>
 
-        <div class="Lname_input">
+        <div class="input_field">
             <input type="text" id="Lname" name="Lname" placeholder=" " required>
             <label for="Lname">Last Name</label>
         </div>
-        
-        <div class="password">
+
+        <!-- Password field with eye icon -->
+        <div class="password-container">
             <input type="password" id="pass_word" name="pass_word" placeholder=" " minlength="8" required>
             <label for="pass_word">Password (min 8 characters)</label>
-        </div>
-        
-        <div class="show-pass">
-            <input type="checkbox" onclick="show_password()"> Show password
+            <span id="eye_Icon" onclick="show_password()">👁️</span>
         </div>
         
         <div class="register_button">
@@ -46,15 +44,62 @@
     </form>
 </div>
 
+<!-- Success Modal -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <div id="modalBody" class="modal-Body"></div>
+        <button onclick="closeModal()" class="close-btn">Close</button>
+    </div>
+</div>
+
 <script>
-    function show_password(){
+    // Toggle password visibility with eye icon
+    function show_password() {
         var x = document.getElementById("pass_word");
-        if (x.type === "password"){
+        var icon = document.getElementById("eye_Icon");
+        if (x.type === "password") {
             x.type = "text";
+            icon.textContent = "🙈";  // Closed eye when showing password
         } else {
             x.type = "password";
+            icon.textContent = "👁️";  // Open eye when hiding password
         }
     }
+
+    // Show modal if membership_id exists (Flask variable)
+    {% if membership_id %}
+    window.onload = function() {
+        const modal = document.getElementById("confirmModal");
+        const modalBody = document.getElementById("modalBody");
+        
+        modalBody.innerHTML = `
+            <div class="success-icon">✓</div>
+            <div>Account Created Successfully!</div>
+            <div class="membership-id"><strong>Your Membership ID:</strong> {{ membership_id }}</div>
+            <div class="welcome-msg">"Better health, better mind, better quality of life"</div>
+        `;
+        
+        modal.style.display = "block";
+        
+        // Auto redirect after 5 seconds
+        setTimeout(function() {
+            window.location.href = "{{ url_for('account_page') }}";
+        }, 5000);
+    };
+    
+    function closeModal() {
+        document.getElementById("confirmModal").style.display = "none";
+        window.location.href = "{{ url_for('account_page') }}";
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById("confirmModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+    {% endif %}
 </script>
 
 </body>
