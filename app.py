@@ -1,20 +1,28 @@
 from flask import Flask, request, render_template, url_for, redirect, session, jsonify
+
+from dotenv import load_dotenv
+load_dotenv("key.env")
 import mysql.connector
+
 import random
 import string
+import os
+
+
 
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-change-this-in-production'
+app.secret_key = os.getenv("SECRET_KEY")   #protect sessions ex cookie
+
+
 
 # Use root with empty password (default for local MySQL)
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "QWERTY1452025A",
-    "database": "papi",
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PASSWORD"),
+    "database": os.getenv("DB_NAME"),
     "raise_on_warnings": True,
 }
-
 def get_connection():
     return mysql.connector.connect(**DB_CONFIG)
 
@@ -93,16 +101,8 @@ def signup():
             )
             conn.commit()
             
-            session['user_id'] = membership_id
-            session['email'] = email
-            session['fname'] = fname
-            session['lname'] = lname
-            
-            next_url = session.pop('next_url', None)
-            if next_url:
-                return redirect(next_url)
-            return redirect(url_for('index'))
-            
+            return render_template('signup.html', membership_id=membership_id)
+        
         finally:
             cur.close()
             conn.close()

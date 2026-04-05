@@ -1,66 +1,74 @@
-/* =========================
-   LOGIN PAGE STYLES
-   ========================= */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
 
-/* Background with gym image */
 .login_background {
     background-image: url("../Photos/backgroundgym.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    overflow: hidden;
-    min-height: 100vh;
+    background-position: center;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Login form container */
+/* Form starts collapsed for animation */
+#login {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s ease-out, padding 0.3s ease;
+    padding: 0 40px;
+}
+
+/* Expanded state */
+#login.open {
+    max-height: 600px;
+    padding: 40px;
+}
+
 .login_form {
     box-sizing: border-box;
     display: grid;
     width: 35%;
     min-width: 400px;
-    min-height: 600px;
-    margin: 100px auto;
+    min-height: 500px;
     font-size: 20px;
     border-radius: 30px;
-    position: relative;
     background-color: #f0f0f0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     gap: 25px;
-    padding: 40px;
 }
 
-/* Centered login title */
 .centerlogin {
     text-align: center;
-    font-family: sans-serif;
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
-    margin-top: -10px;
     color: #333;
 }
 
-/* Input pair container */
 .pair {
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 30px;
     width: 100%;
 }
 
-/* Input container for floating labels */
 .input-container {
     position: relative;
     width: 100%;
 }
 
-/* Modern shadow inputs */
 input[type="text"], 
 input[type="password"] {
     width: 100%;
-    padding: 20px 10px;
+    padding: 20px 12px;
     border: none;
     border-radius: 10px;
     font-size: 16px;
@@ -70,16 +78,22 @@ input[type="password"] {
     outline: none;
 }
 
+/* Extra padding for password field to accommodate eye icon */
+.password-wrapper input {
+    padding-right: 45px;
+}
+
 /* Floating labels */
 .input-container label {
     position: absolute;
-    left: 10px;
+    left: 12px;
     top: 20px;
     font-size: 16px;
     color: #666;
     pointer-events: none;
-    transition: 0.3s;
+    transition: 0.3s ease all;
     background-color: transparent;
+    padding: 0 4px;
 }
 
 input:focus + label,
@@ -88,13 +102,28 @@ input:not(:placeholder-shown) + label {
     font-size: 12px;
     color: #4184f0;
     background-color: white;
-    padding: 0 4px;
-    left: 6px;
+    font-weight: bold;
 }
 
-/* Login button */
+/* Eye icon styling */
+#eyeIcon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+#eyeIcon:hover {
+    opacity: 1;
+}
+
 button[type="submit"] {
-    width: 300px;
+    width: 80%;
     margin: 0 auto;
     display: block;
     padding: 15px;
@@ -103,10 +132,9 @@ button[type="submit"] {
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    font-size: 15px;
-    font-family: sans-serif;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
     font-weight: bold;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: all 0.3s;
 }
 
@@ -115,12 +143,11 @@ button[type="submit"]:hover {
     transform: translateY(-2px);
 }
 
-/* Create account section */
 .create_account {
     text-align: center;
     font-size: 14px;
     color: #333;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .create_account a {
@@ -134,23 +161,18 @@ button[type="submit"]:hover {
     text-decoration: underline;
 }
 
-/* Collapsible animation */
-#login {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 1.5s;
-    padding: 0 10px;
-}
-
-#login.open {
-    max-height: 700px;
-    padding: 40px;
-}
-
-/* Image inside login form (if used) */
-form img {
-    max-width: 333px;
-    position: absolute;
-    top: 1px;
-    right: 1px;
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .login_form {
+        width: 90%;
+        min-width: auto;
+    }
+    
+    #login.open {
+        padding: 30px 20px;
+    }
+    
+    button[type="submit"] {
+        width: 100%;
+    }
 }
