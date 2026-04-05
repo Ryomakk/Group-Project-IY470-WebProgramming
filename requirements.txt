@@ -50,7 +50,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 ##Create an env file called key.env
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=yourpassword
+DB_PASSWORD=yourpasswordofthedata
 DB_NAME=yourname
-SECRET_KEY=make it whatever you want
+SECRET_KEY=make it whatever you want but recommended to generate it using the code below
+
+python -c "import secrets; print(secrets.token_urlsafe(32))"
 
