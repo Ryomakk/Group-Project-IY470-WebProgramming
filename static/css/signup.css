@@ -1,9 +1,9 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-image: url("/static/Photos/gym.jpg");
-    background-size: 106% 100%;
+    background: #ffffff;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
@@ -13,14 +13,15 @@ body {
 .signup_container {
     display: grid;
     min-height: 500px;
-    min-width: 500px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    min-width: 320px;
+    max-width: 450px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(13px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 10%;
-    margin: 130px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    margin: 80px auto;
     font-size: 30px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255,  255, 0.15);
     border-radius: 30px;
     position: relative;
     overflow: hidden;
@@ -28,114 +29,265 @@ body {
 }
 
 .signn {
-    font-size: 30px;
-    margin-bottom: 25px;
+    font-size: 32px;
+    margin-bottom: 30px;
     text-align: center;
     margin-top: 10px;
     color: rgb(0, 0, 0);
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.email_input, .Fname_input, .Lname_input, .password {
+.input_field {
     position: relative;
-    width: 95%;
-    margin-bottom: 15px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-label {
+.input_field label {
     position: absolute;
     left: 12px;
     top: 15px;
-    color: #000000;
+    color: #333;
     pointer-events: none;
-    transition: 0.3s;
+    transition: 0.3s ease all;
     background-color: transparent;
     padding: 0 4px;
     font-size: 16px;
 }
 
-input:focus + label,
-input:not(:placeholder-shown) + label {
-    top: -10px;
-    font-size: 14px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0 8px;
-    border-radius: 4px;
-}
-
-input[type="text"], 
-input[type="email"], 
-input[type="password"] {
-    width: 95%;
+.input_field input {
+    width: 100%;
     padding: 15px 12px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #000;
     font-size: 16px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
-input:focus {
+.input_field input:focus + label,
+.input_field input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 13px;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.input_field input:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
-    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(96, 96, 248, 0.8);
+    background: rgba(255, 255, 255, 0.35);
 }
 
-input::placeholder {
+.input_field input::placeholder {
     color: transparent;
 }
 
-.show-pass {
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Password container with eye icon */
+.password-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
 }
 
-.show-pass input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+.password-container input {
+    width: 100%;
+    padding: 15px 45px 15px 12px;  /* Extra right padding for eye icon */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #000;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.password-container label {
+    position: absolute;
+    left: 12px;
+    top: 15px;
+    color: #333;
+    pointer-events: none;
+    transition: 0.3s ease all;
+    background-color: transparent;
+    padding: 0 4px;
+    font-size: 16px;
+}
+
+.password-container input:focus + label,
+.password-container input:not(:placeholder-shown) + label {
+    top: -10px;
+    font-size: 13px;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.password-container input:focus {
+    outline: none;
+    border-color: rgba(96, 96, 248, 0.8);
+    background: rgba(255, 255, 255, 0.35);
+}
+
+#eye_Icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+#eye_Icon:hover {
+    opacity: 1;
 }
 
 .register_button input {
     border: none;
-    border-radius: 20px;
-    font-size: 20px;
+    border-radius: 25px;
+    font-size: 18px;
     height: 50px;
-    width: 60%;
+    width: 70%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background: linear-gradient(to right, rgb(96, 96, 248), aqua);
+    background: linear-gradient(to right, rgb(96, 96, 248), rgb(0, 200, 255));
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(96, 96, 248, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .register_button input:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(96, 96, 248, 0.6);
 }
 
 .login-link {
     text-align: center;
-    margin-top: 15px;
-    font-size: 16px;
-    color: white;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #000;
+    font-weight: 500;
 }
 
 .login-link a {
-    color: rgb(0, 0, 0);
+    color: rgb(96, 96, 248);
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 .login-link a:hover {
+    color: rgb(0, 150, 255);
     text-decoration: underline;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-Body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.success-icon {
+    font-size: 50px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.membership-id {
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    background: rgba(96, 96, 248, 0.1);
+    border-radius: 8px;
+    border: 2px dashed rgb(96, 96, 248);
+}
+
+.welcome-msg {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.close-btn {
+    background: linear-gradient(to right, rgb(96, 96, 248), rgb(0, 200, 255));
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.close-btn:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+    .signup_container {
+        width: 95%;
+        margin: 40px auto;
+        padding: 30px 20px;
+        min-width: auto;
+    }
+    
+    .signn {
+        font-size: 28px;
+    }
+    
+    .register_button input {
+        width: 100%;
+    }
 }

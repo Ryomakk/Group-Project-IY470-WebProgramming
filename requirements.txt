@@ -46,3 +46,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 TRUNCATE TABLE Memberships;
 TRUNCATE TABLE Account;
 SET FOREIGN_KEY_CHECKS = 1;
+
+##Create an env file called key.env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=yourname
+SECRET_KEY=make it whatever you want
+

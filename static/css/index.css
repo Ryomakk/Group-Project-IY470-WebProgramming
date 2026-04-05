@@ -3,9 +3,10 @@
    ========================= */
 
 body {
-  background: #000000;
+  background: #ffffff;  /* Changed to white primary */
   font-family: sans-serif;
   margin: 0;
+  color: #111111;         /* Added default black text for minimalist contrast */
 }
 
 /* =========================
@@ -13,17 +14,19 @@ body {
    ========================= */
 
 .navbar {
-  background: rgb(0, 0, 0);
+  background: #ffffff;  /* Changed to white */
   padding: 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid #e5e7eb;  /* Added subtle border for definition */
 }
 
 .logo a {
   font-size: 50px;
-  color: #ffffff;
+  color: #000000;       /* Changed to black */
   text-decoration: none;
+  font-weight: 600;     /* Added weight for minimalist strength */
 }
 
 /* Navigation menu */
@@ -36,18 +39,20 @@ body {
 }
 
 .menu a {
-  color: rgb(255, 255, 255);
+  color: #111111;       /* Changed to near-black */
   font-size: 16px;
   padding: 10px 30px;
   text-decoration: none;
   border-radius: 10px;
   position: relative;
   z-index: 1;
+  font-weight: 500;
 }
 
 .menu a:hover {
-  text-decoration: underline;
-  color: #2896cd;
+  text-decoration: none;  /* Removed underline for cleaner look */
+  color: #2563eb;         /* Standardized blue accent */
+  background: #f3f4f6;    /* Added subtle hover background */
 }
 
 /* =========================
@@ -62,24 +67,26 @@ body {
 .user-dropdown { 
   display: none; 
   position: absolute; 
-  background-color: white; 
+  background-color: #ffffff;  /* Kept white */
   min-width: 160px; 
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2); 
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);  /* Softer shadow */
   z-index: 1000; 
-  border-radius: 5px; 
+  border-radius: 8px; 
   right: 0; 
   top: 100%;
+  border: 1px solid #e5e7eb;  /* Added subtle border */
 }
 
 .user-dropdown a { 
-  color: black; 
+  color: #111111;           /* Changed to black */
   padding: 12px 16px; 
   text-decoration: none; 
   display: block; 
+  font-weight: 500;
 }
 
 .user-dropdown a:hover { 
-  background-color: #f1f1f1; 
+  background-color: #f3f4f6;  /* Light gray hover */
 }
 
 .user-menu:hover .user-dropdown { 
@@ -87,7 +94,7 @@ body {
 }
 
 .welcome-text { 
-  color: #4184f0; 
+  color: #2563eb;           /* Standardized blue accent */
   font-weight: bold; 
   font-variant: small-caps; 
 }
@@ -104,17 +111,19 @@ body {
   top: 0; 
   width: 100%; 
   height: 100%; 
-  background-color: rgba(0,0,0,0.5); 
+  background-color: rgba(0,0,0,0.4);  /* Slightly lighter overlay */
 }
 
 .modal-content { 
-  background-color: white; 
+  background-color: #ffffff; 
   margin: 10% auto; 
   padding: 30px; 
-  border-radius: 10px; 
+  border-radius: 12px;      /* Slightly larger radius */
   width: 80%; 
   max-width: 400px; 
   position: relative; 
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);  /* Minimalist shadow */
+  border: 1px solid #e5e7eb;
 }
 
 .close { 
@@ -123,6 +132,11 @@ body {
   top: 15px; 
   font-size: 28px; 
   cursor: pointer; 
+  color: #6b7280;           /* Gray instead of black for subtlety */
+}
+
+.close:hover {
+  color: #000000;           /* Black on hover */
 }
 
 /* About Modal Specific */
@@ -135,20 +149,20 @@ body {
 }
 
 .about-section h3 { 
-  color: #4184f0; 
+  color: #2563eb;           /* Blue accent */
   margin-bottom: 10px; 
-  border-bottom: 2px solid #f0f0f0; 
+  border-bottom: 2px solid #e5e7eb;  /* Light gray border */
   padding-bottom: 5px; 
 }
 
 .about-section p { 
   margin: 8px 0; 
-  color: #333; 
+  color: #374151;           /* Dark gray for readability */
 }
 
 .plan-badge { 
   display: inline-block; 
-  background: #4184f0; 
+  background: #2563eb;      /* Blue accent */
   color: white; 
   padding: 4px 12px; 
   border-radius: 15px; 
@@ -157,7 +171,7 @@ body {
 }
 
 .no-plan { 
-  color: #888; 
+  color: #9ca3af;           /* Light gray */
   font-style: italic; 
 }
 
@@ -169,19 +183,20 @@ body {
 }
 
 .plan-detail-item { 
-  background: #f8f9fa; 
+  background: #f9fafb;      /* Very light gray */
   padding: 10px; 
-  border-radius: 5px; 
+  border-radius: 6px; 
+  border: 1px solid #e5e7eb;
 }
 
 .plan-detail-label { 
   font-size: 0.85em; 
-  color: #666; 
+  color: #6b7280;           /* Medium gray */
 }
 
 .plan-detail-value { 
   font-weight: bold; 
-  color: #333; 
+  color: #111827;           /* Near black */
 }
 
 /* =========================
@@ -194,6 +209,7 @@ body {
   height: 100vh;
   overflow: hidden;
   font-family: Arial, sans-serif;
+  background: #ffffff;    /* Added white fallback */
 }
 
 .slider img {
@@ -205,6 +221,7 @@ body {
   opacity: 0;
   animation: slide 16s infinite;
   transform: scale(1);
+  filter: grayscale(20%);  /* Subtle minimalist filter */
 }
 
 .slider img:nth-of-type(1) { animation-delay: 0s; }
@@ -226,7 +243,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.55);  /* Changed to white overlay for minimalist look */
   z-index: 1;
 }
 
@@ -236,7 +253,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
+  color: #000000;           /* Changed to black text */
   z-index: 2;
 }
 
@@ -249,6 +266,8 @@ body {
   animation: textFade 2s forwards;
   animation-delay: 0.5s;
   letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #000000;           /* Ensured black */
 }
 
 .slider-text p {
@@ -259,6 +278,7 @@ body {
   transform: translateY(-20px);
   animation: textFade 2s forwards;
   animation-delay: 0.5s;
+  color: #374151;           /* Dark gray for minimalist hierarchy */
 }
 
 @keyframes textFade {
@@ -273,24 +293,25 @@ body {
   text-decoration: none;
   text-align: center;
   background-color: transparent;
-  color: #ffffff;
+  color: #000000;           /* Changed to black */
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.15em;
   padding: 14px 40px;
-  border: 2px solid #ffffff;
+  border: 2px solid #000000;  /* Changed to black */
   border-radius: 0px;
   cursor: pointer;
   opacity: 0;
   transform: translateY(-20px);
   animation: textFade 2s forwards;
   animation-delay: 0.5s;
+  transition: all 0.3s ease;  /* Added smooth transition */
 }
 
 .button:hover {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #000000;  /* Inverted: black bg */
+  color: #ffffff;             /* Inverted: white text */
 }
 
 /* =========================
@@ -300,17 +321,20 @@ body {
 .facility {
   padding: 80px 10%;
   text-align: center;
+  background: #ffffff;        /* Explicit white background */
 }
 
 .facility h2 {
   font-size: 42px;
   margin-bottom: 10px;
-  color: white;
+  color: #111827;             /* Black heading */
+  font-weight: 700;
 }
 
 .subtitle {
-  color: #aaa;
+  color: #6b7280;             /* Gray subtitle for minimalist hierarchy */
   margin-bottom: 50px;
+  font-weight: 400;
 }
 
 .facility-cards {
@@ -327,13 +351,15 @@ body {
   overflow: hidden;
   border-radius: 15px;
   cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);  /* Minimalist shadow */
+  border: 1px solid #e5e7eb;  /* Added subtle border */
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(75%);
+  filter: grayscale(30%) brightness(95%);  /* Subtle minimalist filter */
   transition: transform 0.5s ease, filter 0.5s ease;
 }
 
@@ -346,28 +372,29 @@ body {
   box-sizing: border-box;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.0) 100%
+    rgba(255, 255, 255, 0.95) 0%,  /* White gradient instead of black */
+    rgba(255, 255, 255, 0) 100%
   );
   transform: translateY(100%);
   transition: transform 0.4s ease;
-  color: white;
+  color: #111827;                  /* Black text */
 }
 
 .card h3 {
   margin-bottom: 10px;
   font-size: 21px;
-  color: white;
+  color: #111827;                  /* Black text */
+  font-weight: 600;
 }
 
 .card p {
   font-size: 14px;
-  color: #ddd;
+  color: #4b5563;                  /* Dark gray */
 }
 
 .card:hover img {
   transform: scale(1.1);
-  filter: brightness(90%);
+  filter: grayscale(0%) brightness(100%);  /* Remove filter on hover */
 }
 
 .card:hover .card-content {
@@ -380,13 +407,16 @@ body {
 
 .equipment {
   padding: 80px 10%;
-  color: #fff;
+  color: #111827;                  /* Black text */
+  background: #f9fafb;             /* Light gray background for contrast section */
 }
 
 .equipment h2 {
   font-size: 42px;
   margin-bottom: 10px;
   text-align: center;
+  color: #111827;
+  font-weight: 700;
 }
 
 .equipment-group {
@@ -396,8 +426,10 @@ body {
 .group-title {
   font-size: 33px;
   margin-bottom: 20px;
-  border-left: 4px solid #e10600;
+  border-left: 4px solid #2563eb;  /* Changed red to blue accent */
   padding-left: 12px;
+  color: #111827;
+  font-weight: 600;
 }
 
 .equipment-slider {
@@ -410,24 +442,34 @@ body {
 
 .equipment-card {
   min-width: 260px;
-  background: #111;
+  background: #ffffff;             /* White cards */
   border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #e5e7eb;       /* Subtle border */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.equipment-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);  /* Elevate on hover */
 }
 
 .equipment-card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
+  filter: grayscale(20%);
 }
 
 .equipment-card h4 {
   margin: 15px;
+  color: #111827;
+  font-weight: 600;
 }
 
 .equipment-card p {
   margin: 0 15px 20px;
-  color: #aaa;
+  color: #6b7280;                  /* Medium gray */
   font-size: 14px;
 }
 
@@ -436,8 +478,10 @@ body {
    ========================= */
 
 .footer {
-  color: rgb(143, 141, 141);
+  color: #6b7280;                  /* Gray text */
   padding: 40px 0 20px 0;
+  background: #ffffff;               /* White background */
+  border-top: 1px solid #e5e7eb;   /* Top border for separation */
 }
 
 .footer-container {
@@ -455,22 +499,27 @@ body {
 
 .footer-section h2,
 .footer-section h3 {
-  color: #f5f1f1;
+  color: #111827;                  /* Black headings */
+  font-weight: 700;
 }
 
 .footer-section a {
   display: block;
-  color: rgb(143, 141, 141);
+  color: #6b7280;                  /* Gray links */
   text-decoration: none;
   margin: 8px 0;
+  transition: color 0.2s;
 }
 
 .footer-section a:hover {
-  color: #ece5e5;
+  color: #2563eb;                  /* Blue on hover */
 }
 
 .footer-bottom {
   font-size: 15px;
+  color: #9ca3af;                  /* Light gray */
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* =========================
@@ -488,7 +537,7 @@ body {
 
 .wrapper .icon {
   position: relative;
-  background: #fff;
+  background: #f3f4f6;             /* Light gray instead of pure white */
   border-radius: 50%;
   margin: 10px;
   width: 50px;
@@ -498,9 +547,11 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 1px solid #e5e7eb;        /* Subtle border */
+  color: #374151;                  /* Dark gray icons */
 }
 
 .wrapper .tooltip {
@@ -541,11 +592,13 @@ body {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
 }
 
+/* Social brand colors remain distinct but subtle */
 .wrapper .facebook:hover,
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
   background: #1877f2;
   color: #fff;
+  border-color: transparent;
 }
 
 .wrapper .twitter:hover,
@@ -553,6 +606,7 @@ body {
 .wrapper .twitter:hover .tooltip::before {
   background: #1da1f2;
   color: #fff;
+  border-color: transparent;
 }
 
 .wrapper .instagram:hover,
@@ -560,4 +614,5 @@ body {
 .wrapper .instagram:hover .tooltip::before {
   background: #e4405f;
   color: #fff;
+  border-color: transparent;
 }
