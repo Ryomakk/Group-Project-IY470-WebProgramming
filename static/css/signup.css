@@ -1,3 +1,16 @@
+/* ============================================
+   SIGNUP PAGE STYLESHEET
+   Glassmorphism Design with Floating Labels
+   ============================================ */
+
+/* ============================================
+   BASE RESET & GLOBAL STYLES
+   ============================================ */
+
+/* Universal reset - remove default browser margins and padding
+   White background (#ffffff) with full viewport coverage
+   Arial font stack as base typography
+   overflow-x: hidden prevents horizontal scroll on mobile */
 html, body {
     margin: 0;
     padding: 0;
@@ -10,6 +23,16 @@ html, body {
     overflow-x: hidden;
 }
 
+/* ============================================
+   MAIN SIGNUP CONTAINER (Glassmorphism Card)
+   ============================================ */
+
+/* Primary signup form container with glassmorphism effect
+   Grid layout for internal organization
+   Responsive sizing: min 320px, max 450px, typically 90% width
+   Semi-transparent white background (0.15 opacity) with backdrop blur
+   30px border radius creates soft rounded corners
+   80px top margin positions below potential header/nav */
 .signup_container {
     display: grid;
     min-height: 500px;
@@ -21,13 +44,21 @@ html, body {
     width: 90%;
     margin: 80px auto;
     font-size: 30px;
-    background: rgba(255, 255,  255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 30px;
     position: relative;
     overflow: hidden;
     padding: 40px;
 }
 
+/* ============================================
+   HEADER/TITLE STYLES
+   ============================================ */
+
+/* Signup page heading - "Sign Up" or equivalent title
+   32px large text with bold weight for prominence
+   Centered alignment with uppercase transformation
+   Letter-spacing adds premium feel */
 .signn {
     font-size: 32px;
     margin-bottom: 30px;
@@ -39,12 +70,23 @@ html, body {
     letter-spacing: 1px;
 }
 
+/* ============================================
+   FLOATING LABEL INPUT FIELDS (Standard)
+   ============================================ */
+
+/* Input field container - establishes positioning context
+   Relative positioning allows absolute positioning of label inside
+   Full width with bottom margin for spacing between fields */
 .input_field {
     position: relative;
     width: 100%;
     margin-bottom: 20px;
 }
 
+/* Floating label - initially positioned inside input (left: 12px, top: 15px)
+   pointer-events: none allows clicking through to input
+   Transition creates smooth animation when floating up
+   Transparent background initially, becomes opaque when floated */
 .input_field label {
     position: absolute;
     left: 12px;
@@ -57,6 +99,11 @@ html, body {
     font-size: 16px;
 }
 
+/* Standard text input styling within glassmorphism container
+   Semi-transparent background (0.25 opacity white)
+   Rounded corners (10px) matching container radius
+   Box shadow creates subtle depth
+   Border transitions color on focus */
 .input_field input {
     width: 100%;
     padding: 15px 12px;
@@ -70,6 +117,10 @@ html, body {
     transition: all 0.3s ease;
 }
 
+/* Active floating label state - triggered on input focus or when value exists
+   Label moves up (top: -10px), shrinks (13px), gets background highlight
+   Padding increases to create pill-shaped label background
+   Font weight becomes bold for emphasis */
 .input_field input:focus + label,
 .input_field input:not(:placeholder-shown) + label {
     top: -10px;
@@ -81,23 +132,38 @@ html, body {
     font-weight: bold;
 }
 
+/* Focus state for input field - visual feedback for active field
+   Blue border (#6060f8 with 0.8 opacity) indicates focus
+   Slightly more opaque background (0.35) for emphasis
+   outline: none removes default browser outline */
 .input_field input:focus {
     outline: none;
     border-color: rgba(96, 96, 248, 0.8);
     background: rgba(255, 255, 255, 0.35);
 }
 
+/* Hide placeholder text - using floating labels instead of placeholders
+   placeholder-shown selector above handles label visibility */
 .input_field input::placeholder {
     color: transparent;
 }
 
-/* Password container with eye icon */
+/* ============================================
+   PASSWORD FIELD WITH VISIBILITY TOGGLE
+   ============================================ */
+
+/* Password input container - variant of input_field with eye icon space
+   Same structure as standard input but with right padding for icon
+   25px bottom margin for spacing from next element */
 .password-container {
     position: relative;
     width: 100%;
     margin-bottom: 25px;
 }
 
+/* Password input field - extra right padding (45px) prevents text overlap with eye icon
+   Other styling identical to standard input for consistency
+   15px top/bottom, 45px right, 12px left padding */
 .password-container input {
     width: 100%;
     padding: 15px 45px 15px 12px;  /* Extra right padding for eye icon */
@@ -111,6 +177,9 @@ html, body {
     transition: all 0.3s ease;
 }
 
+/* Floating label for password - same positioning as standard input
+   Positions at 12px left, 15px top initially
+   Transitions to floated position on focus/value */
 .password-container label {
     position: absolute;
     left: 12px;
@@ -123,6 +192,9 @@ html, body {
     font-size: 16px;
 }
 
+/* Password label float animation - identical to standard input behavior
+   Moves up 10px, shrinks font, gets white background highlight
+   Applied via :focus and :not(:placeholder-shown) selectors */
 .password-container input:focus + label,
 .password-container input:not(:placeholder-shown) + label {
     top: -10px;
@@ -134,12 +206,19 @@ html, body {
     font-weight: bold;
 }
 
+/* Password input focus state - blue border highlight
+   Consistent with standard input focus behavior */
 .password-container input:focus {
     outline: none;
     border-color: rgba(96, 96, 248, 0.8);
     background: rgba(255, 255, 255, 0.35);
 }
 
+/* Eye icon for password visibility toggle
+   Positioned absolute right side, vertically centered
+   JavaScript toggles between 👁 (show) and 🙈 (hide) icons
+   0.7 opacity default, 1.0 on hover for feedback
+   user-select: none prevents text selection */
 #eye_Icon {
     position: absolute;
     right: 15px;
@@ -152,10 +231,19 @@ html, body {
     transition: opacity 0.3s;
 }
 
+/* Eye icon hover state - full opacity indicates interactivity */
 #eye_Icon:hover {
     opacity: 1;
 }
 
+/* ============================================
+   SUBMIT BUTTON
+   ============================================ */
+
+/* Register/Submit button container - no border, centered gradient button
+   Linear gradient from purple-blue (#6060f8) to cyan (#00c8ff)
+   25px border-radius creates pill shape
+   70% width centered with auto margins */
 .register_button input {
     border: none;
     border-radius: 25px;
@@ -175,11 +263,20 @@ html, body {
     letter-spacing: 1px;
 }
 
+/* Button hover state - lifts up 2px (translateY) with enhanced shadow
+   Creates tactile feedback and depth perception */
 .register_button input:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(96, 96, 248, 0.6);
 }
 
+/* ============================================
+   LOGIN LINK (ALTERNATE ACTION)
+   ============================================ */
+
+/* "Already have an account? Login" text styling
+   Centered below submit button
+   15px font with medium weight */
 .login-link {
     text-align: center;
     margin-top: 20px;
@@ -188,6 +285,9 @@ html, body {
     font-weight: 500;
 }
 
+/* Login hyperlink - brand blue color (#6060f8)
+   No underline default, appears on hover
+   Bold weight for prominence as call-to-action */
 .login-link a {
     color: rgb(96, 96, 248);
     text-decoration: none;
@@ -195,12 +295,22 @@ html, body {
     transition: color 0.3s;
 }
 
+/* Login link hover - brighter blue (#0096ff) with underline
+   Visual feedback indicates clickable element */
 .login-link a:hover {
     color: rgb(0, 150, 255);
     text-decoration: underline;
 }
 
-/* Modal Styles */
+/* ============================================
+   SUCCESS MODAL (POPUP)
+   ============================================ */
+
+/* Modal overlay container - fixed position covering entire viewport
+   display: none initially, shown via JavaScript
+   z-index: 1000 ensures modal floats above all content
+   Dark semi-transparent background (0.6 opacity black)
+   Backdrop blur creates focus on modal */
 .modal {
     display: none;
     position: fixed;
@@ -213,6 +323,11 @@ html, body {
     backdrop-filter: blur(5px);
 }
 
+/* Modal content card - white background centered in viewport
+   10% top margin positions below browser chrome
+   90% width mobile-friendly with 400px max-width
+   Slide-in animation from top (translateY)
+   Heavy shadow creates elevation above overlay */
 .modal-content {
     background-color: #ffffff;
     margin: 10% auto;
@@ -225,11 +340,15 @@ html, body {
     animation: modalSlide 0.3s ease;
 }
 
+/* Modal entrance animation - slides down from -50px with fade
+   Easing function creates natural deceleration */
 @keyframes modalSlide {
     from { transform: translateY(-50px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
+/* Modal body content layout - flex column with 15px gaps
+   Vertical stack of success icon, membership ID, welcome message */
 .modal-Body {
     display: flex;
     flex-direction: column;
@@ -237,12 +356,17 @@ html, body {
     margin-bottom: 20px;
 }
 
+/* Success checkmark icon - large 50px green color (#4CAF50)
+   10px bottom margin separates from membership ID */
 .success-icon {
     font-size: 50px;
     color: #4CAF50;
     margin-bottom: 10px;
 }
 
+/* Membership ID display box - 18px text on light blue background
+   Dashed blue border makes it distinct/important
+   8px border radius, 10px padding */
 .membership-id {
     font-size: 18px;
     color: #333;
@@ -252,6 +376,9 @@ html, body {
     border: 2px dashed rgb(96, 96, 248);
 }
 
+/* Welcome message text - smaller 14px gray italic
+   10px top margin separates from ID box
+   Italic style adds friendly tone */
 .welcome-msg {
     font-size: 14px;
     color: #666;
@@ -259,6 +386,9 @@ html, body {
     margin-top: 10px;
 }
 
+/* Modal close button - same gradient as submit button
+   25px border radius, padding 12px vertical 30px horizontal
+   Scale animation on hover (1.05x) */
 .close-btn {
     background: linear-gradient(to right, rgb(96, 96, 248), rgb(0, 200, 255));
     color: white;
@@ -271,22 +401,34 @@ html, body {
     transition: transform 0.3s;
 }
 
+/* Close button hover - subtle scale up for tactile feedback */
 .close-btn:hover {
     transform: scale(1.05);
 }
 
+/* ============================================
+   MOBILE RESPONSIVE STYLES
+   ============================================ */
+
+/* Mobile breakpoint - screens 480px and narrower
+   Increases container width to 95%
+   Reduces margins and padding for small screens
+   Adjusts font sizes and button widths */
 @media (max-width: 480px) {
+    /* Container adjustments - wider, closer to edges, less padding */
     .signup_container {
         width: 95%;
         margin: 40px auto;
         padding: 30px 20px;
         min-width: auto;
     }
-    
+
+    /* Smaller heading font on mobile - 28px vs 32px desktop */
     .signn {
         font-size: 28px;
     }
-    
+
+    /* Full width button on mobile for easier touch targeting */
     .register_button input {
         width: 100%;
     }

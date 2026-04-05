@@ -1,3 +1,4 @@
+/*Remove default margin and padding to prevent white gaps*/
 html, body {
     margin: 0;
     padding: 0;
@@ -5,12 +6,13 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
+/* Full-screen background with gym photo */
 .login_background {
     background-image: url("../Photos/backgroundgym.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    position: fixed;
+    position: fixed; /* prevents scrolling away from the background */
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -21,20 +23,22 @@ html, body {
 /* Form starts collapsed for animation */
 #login {
     max-height: 0;
-    overflow: hidden;
+    overflow: hidden;  /* hides content while collapsed */
     transition: max-height 0.8s ease-out, padding 0.3s ease;
     padding: 0 40px;
 }
 
 /* Expanded state */
 #login.open {
-    max-height: 600px;
+    max-height: 600px; /* must be >= the form's actual height for the transition to work */
     padding: 40px;
 }
 
+
+/* Login form sizing and layout */
 .login_form {
-    box-sizing: border-box;
-    display: grid;
+    box-sizing: border-box; /*ensures that padding and borders are included within the element’s total width and height*/
+    display: grid; /*for flexibility*/
     width: 35%;
     min-width: 400px;
     min-height: 500px;
@@ -45,6 +49,7 @@ html, body {
     gap: 25px;
 }
 
+/* Login title */
 .centerlogin {
     text-align: center;
     font-size: 28px;
@@ -53,18 +58,20 @@ html, body {
     color: #333;
 }
 
+/* Input fields wrapper for membership and password field*/
 .pair {
     display: flex;
     flex-direction: column;
     gap: 30px;
     width: 100%;
 }
-
+/*Anchor for floating label positioning*/
 .input-container {
-    position: relative;
+    position: relative; /* needed so absolutely-positioned label anchors to this */
     width: 100%;
 }
 
+/* Text and password input styling */
 input[type="text"], 
 input[type="password"] {
     width: 100%;
@@ -73,9 +80,9 @@ input[type="password"] {
     border-radius: 10px;
     font-size: 16px;
     box-sizing: border-box;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /*soft shadow around input field*/
     background: white;
-    outline: none;
+    outline: none; /* removes default focus ring*/
 }
 
 /* Extra padding for password field to accommodate eye icon */
@@ -96,12 +103,14 @@ input[type="password"] {
     padding: 0 4px;
 }
 
+/* Floats label above input on focus or when field has a value */
+
 input:focus + label,
-input:not(:placeholder-shown) + label {
+input:not(:placeholder-shown) + label {  /*Targets the same label when the input has text typed into it*/
     top: -10px;
     font-size: 12px;
-    color: #4184f0;
-    background-color: white;
+    color: #4184f0; 
+    background-color: white; /* covers input border so label appears to sit on top of it */
     font-weight: bold;
 }
 
@@ -110,10 +119,10 @@ input:not(:placeholder-shown) + label {
     position: absolute;
     right: 15px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* vertically centres icon regardless of its own height */
     cursor: pointer;
     font-size: 20px;
-    user-select: none;
+    user-select: none; /* prevents accidental text selection on click */
     opacity: 0.7;
     transition: opacity 0.3s;
 }
@@ -122,9 +131,10 @@ input:not(:placeholder-shown) + label {
     opacity: 1;
 }
 
+/* Submit button */
 button[type="submit"] {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto; /* centres button within the grid column */
     display: block;
     padding: 15px;
     background-color: #4184f0;
@@ -138,41 +148,43 @@ button[type="submit"] {
     transition: all 0.3s;
 }
 
+/* Lift effect on hover */
 button[type="submit"]:hover {
     background-color: #357ae8;
     transform: translateY(-2px);
 }
 
+/* Create account link row */
 .create_account {
     text-align: center;
     font-size: 14px;
     color: #333;
-    margin-top: 10px;
+    margin-top: 10px;  /*movethe element downwards*/
 }
 
+/*Log in anchor link effect cancel and styling*/
 .create_account a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: none; 
     font-weight: bold;
-    margin-left: 5px;
+    margin-left: 5px; /*move the element to the right*/
 }
 
+/* Log in hoverable anchor link styling*/
 .create_account a:hover {
     text-decoration: underline;
 }
 
-/* Mobile responsive */
-@media (max-width: 480px) {
-    .login_form {
-        width: 90%;
-        min-width: auto;
-    }
+
+.login_form {
+    width: 36%;
+    min-width: auto;
+}
     
-    #login.open {
-        padding: 30px 20px;
-    }
+#login.open {
+    padding: 30px 20px;
+}
     
-    button[type="submit"] {
-        width: 100%;
-    }
+button[type="submit"] {
+    width: 100%;
 }
