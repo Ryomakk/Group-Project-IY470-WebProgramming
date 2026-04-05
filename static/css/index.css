@@ -383,9 +383,14 @@ body {
   color: #fff;
 }
 
-.equipment h2 {
+.equipment h2  {
   font-size: 42px;
   margin-bottom: 10px;
+  text-align: center;
+}
+
+.equipment p{
+  font-size: 17px;
   text-align: center;
 }
 
