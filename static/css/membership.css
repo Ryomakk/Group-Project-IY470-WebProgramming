@@ -1,11 +1,17 @@
-/* Base reset - remove default margins and apply border-box for predictable sizing */
+/* ============================================
+   BASE RESET & GLOBAL STYLES
+   ============================================ */
+
+/* Universal reset - remove default browser margins/padding 
+   Border-box ensures padding doesn't affect element width calculations */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Base typography and background - system font stack with slate background */
+/* Base body typography - system font stack for native feel on all platforms
+   Slate background (#f8fafc) provides subtle contrast to white cards */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: #f8fafc;
@@ -13,31 +19,49 @@ body {
   line-height: 1.6;
 }
 
-/* Shared flex centering pattern used by icons and step numbers */
+/* ============================================
+   UTILITY & SHARED PATTERNS
+   ============================================ */
+
+/* Flexbox centering utility - used by step number badges and result bar icons
+   Ensures perfect vertical and horizontal alignment of content */
 .step-number, .result-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Result bar icon sizing - white checkmark inside blue square
+   Larger than default for visibility at bottom of screen */
 .result-icon svg {
   width: 32px;
   height: 32px;
   color: white;
 }
 
-/* Brand color accents - blue highlights for uGym elements and active states */
+/* ============================================
+   BRAND COLOR SYSTEM
+   ============================================ */
+
+/* Primary brand blue - used for uGym pricing numbers and active tier text
+   #0284c7 is a deeper blue, distinct from the lighter #0ea5e9 used for backgrounds */
 .option-card.active h4, .gym-card.ugym .amount {
   color: #0284c7;
 }
 
-/* Muted text color - shared gray for descriptions, labels, and secondary info */
+/* Muted slate gray - shared text color for secondary information
+   Used consistently across 9+ different element types for visual harmony */
 .winner-text, .result-text p, .breakdown-title, .price-display .currency, 
 .price-display .period, .option-card p, .info-box p, .joining-fee-display, .reset-btn svg {
   color: #64748b;
 }
 
-/* Flex row layouts - shared gap spacing for button groups */
+/* ============================================
+   BUTTON COMPONENTS
+   ============================================ */
+
+/* Result bar button container - holds Reset and Continue buttons
+   Centered with margin for visual breathing room */
   .result-buttons {
   display: flex;
   gap: 12px;
@@ -45,7 +69,8 @@ body {
   justify-content: center;
 }
 
-/* Base button styles - shared padding, radius, and hover transitions */
+/* Base button reset - shared styling foundation for all interactive buttons
+   Consistent padding creates tap targets, radius softens corners */
 .btn-primary, .btn-secondary, .select-btn, .btn-continue {
   padding: 12px 24px;
   border-radius: 10px;
@@ -55,40 +80,53 @@ body {
   transition: all .2s;
 }
 
-/* Primary CTA - solid blue for affirmative actions (Yes, Continue) */
+/* Primary CTA button - solid blue background for affirmative actions
+   Used for main progression actions in modal contexts */
 .btn-primary {
   background: #0ea5e9;
   color: white;
   border: none;
 }
 
-/* Blue hover states - shared between primary buttons and active service overlays */
+/* Primary button hover - deeper blue indicates interactivity
+   Also used as active overlay for service cards when selected */
 .btn-primary:hover, .service-card.active .overlay {
   background: #0284c7;
 }
 
-/* Secondary/outline buttons - white with gray borders for neutral actions */
+/* Secondary/outline buttons - white background with subtle gray border
+   Used for neutral/secondary actions and gym selection buttons */
 .btn-secondary, .select-btn {
   background: white;
   border: 1px solid #e2e8f0;
 }
 
-/* Subtle hover backgrounds - shared tint for secondary buttons and reset */
+/* Secondary button hover - very light gray background tint
+   Also applied to reset button for consistent hover feedback */
 .btn-secondary:hover, .reset-btn:hover {
   background: #f1f5f9;
 }
 
-/* Explicit text color for secondary buttons (not inherited in all browsers) */
+/* Explicit text color for secondary buttons
+   Some browsers don't inherit color properly on button elements */
 .btn-secondary {
   color: #64748b;
 }
 
-/* Utility - force hide elements from view and accessibility tree */
+/* Utility class - completely removes element from layout and accessibility tree
+   Used by JavaScript to hide/show elements dynamically */
 .hidden {
   display: none !important;
 }
 
-/* Hero banner - dual-layer background with gradient overlay for text readability */
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+/* Hero banner container - 350px tall with layered backgrounds
+   Gradient overlay (white to semi-transparent blue) ensures text readability
+   Background image positioned center with cover sizing
+   Bottom margin creates space for overlapping panel */
 .hero {
   height: 350px;
   background: linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(40,152,200,0.8) 50%, transparent 100%), 
@@ -99,7 +137,8 @@ body {
   margin-bottom: 100px; /* Space for overlapping panel below */
 }
 
-/* Main headline - large bold typography with tight line height */
+/* Main headline typography - very large (48px) with tight line height
+   Bold weight (800) creates strong visual hierarchy */
 .hero-content h1 {
   font-size: 48px;
   font-weight: 800;
@@ -107,12 +146,15 @@ body {
   margin-bottom: 12px;
 }
 
-/* Subheadline - smaller text with muted color */
+/* Hero subheadline - smaller text (18px) for value proposition
+   Inherits slate gray color from body */
 .hero-content p {
   font-size: 18px;
 }
 
-/* Small uppercase badge - appears above main headline (e.g., "MEMBERSHIP PLANS") */
+/* Badge/tag above headline - small uppercase text with accent color
+   Flex layout centers the dot indicator with text
+   Letter-spacing creates premium feel */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -125,24 +167,37 @@ body {
   margin-bottom: 16px;
 }
 
-/* Layout containers - max-width centering for consistent content width */
+/* ============================================
+   LAYOUT CONTAINERS
+   ============================================ */
+
+/* Max-width container - centers content on wide screens
+   Shared by main container and result bar content for alignment */
 .container, .result-content {
   max-width: 1100px;
   margin: 0 auto;
 }
 
-/* Main content padding - bottom padding prevents overlap with fixed result bar */
+/* Main content wrapper - horizontal padding for mobile breathing room
+   Large bottom padding prevents content from being hidden behind fixed result bar */
 .container {
   padding: 0 20px 100px;
 }
 
-/* White card backgrounds - shared by panel, info box, and gym cards */
+/* Shared card background - white with 16px rounded corners
+   Used for main panel, info box, and both gym cards */
 .panel, .info-box, .gym-card {
   background: white;
   border-radius: 16px;
 }
 
-/* Main selection panel - negative margin creates overlap with hero image */
+/* ============================================
+   SELECTION PANEL (STEP 1 & 2)
+   ============================================ */
+
+/* Main selection card - overlaps hero image with negative margin (-40px)
+   Shadow and border create depth and definition
+   Padding provides internal spacing for selection options */
 .panel {
   padding: 32px;
   margin-top: -40px;
@@ -150,7 +205,8 @@ body {
   border: 1px solid #e2e8f0;
 }
 
-/* Section headers - flex layout with gap for step numbers or icons */
+/* Section headers - flex layout with 12px gap for step numbers/icons
+   Used for "Select Gym Access" and "Add Extras" titles */
 .section-title, .compare-header {
   display: flex;
   align-items: center;
@@ -160,7 +216,9 @@ body {
   margin-bottom: 16px;
 }
 
-/* Circular step badges - light blue background with darker text */
+/* Circular step indicator badges - 32px square with rounded corners
+   Light blue background (#e0f2fe) with darker text (#0284c7)
+   Indicates step 01 and 02 in the selection flow */
 .step-number {
   width: 32px;
   height: 32px;
@@ -170,19 +228,26 @@ body {
   font-size: 13px;
 }
 
-/* CSS Grid layouts - shared gap spacing for option and service grids */
+/* ============================================
+   GYM TIER SELECTION GRID (STEP 1)
+   ============================================ */
+
+/* CSS Grid base - shared gap spacing for tier and service grids
+   12px gap provides visual separation without excessive whitespace */
 .options-grid, .services-grid {
   display: grid;
   gap: 12px;
 }
 
-/* Responsive tier grid - auto-fit creates as many 180px columns as fit */
+/* Responsive tier grid - auto-fit creates as many 180px columns as fit
+   Single column on mobile, 2 columns on tablet, 4 on desktop */
 .options-grid {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   margin-bottom: 32px;
 }
 
-/* Interactive cards - shared positioning and transition for hover effects */
+/* Interactive card base - shared positioning and hover transitions
+   Used for both tier cards and service cards */
 .option-card, .service-card {
   border-radius: 12px;
   position: relative;
@@ -190,31 +255,36 @@ body {
   transition: all .2s;
 }
 
-/* Tier cards - bordered boxes with padding */
+/* Tier option cards - bordered boxes with internal padding
+   2px border allows for visible color change on selection */
 .option-card {
   border: 2px solid #e2e8f0;
   padding: 16px;
 }
 
-/* Blue border highlights - shared hover state for interactive elements */
+/* Hover interaction - blue border indicates clickable elements
+   Shared across tier cards, service cards, and selection buttons */
 .option-card:hover, .service-card:hover, .select-btn:hover {
   border-color: #0ea5e9;
 }
 
-/* Active tier state - blue border with subtle glow shadow */
+/* Active/selected tier state - blue border with subtle glow shadow
+   Indicates currently selected gym access level */
 .option-card.active {
   border-color: #0ea5e9;
   box-shadow: 0 2px 8px rgba(14,165,233,0.15);
 }
 
-/* Absolute positioning - checkmarks in top-right corners */
+/* Shared absolute positioning - checkmark indicators in top-right corners
+   12px offset from edges for visual balance */
 .option-card.active::after, .service-card .check {
   position: absolute;
   top: 12px;
   right: 12px;
 }
 
-/* Selected tier indicator - blue dot pseudo-element */
+/* Active tier indicator - blue dot created via pseudo-element
+   20px circle positioned top-right of selected tier */
 .option-card.active::after {
   content: '';
   width: 20px;
@@ -223,66 +293,76 @@ body {
   border-radius: 50%;
 }
 
-/* Tier name typography */
+/* Tier name typography - slightly larger (15px) with medium weight
+   4px margin separates from restriction text below */
 .option-card h4 {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 4px;
 }
 
-/* Smaller muted text for tier restrictions */
+/* Tier restriction text - smaller (12px) muted gray
+   Shows time restrictions (e.g., "10am - 12pm & 2pm - 4pm") */
 .option-card p {
   font-size: 12px;
 }
 
-/* Horizontal divider - subtle line between sections */
+/* Visual separator - horizontal line between tier and extras sections
+   Subtle gray (#e2e8f0) with vertical margins */
 .divider {
   height: 1px;
   background: #e2e8f0;
   margin: 24px 0;
 }
 
-/* Service grid - fixed 2-column layout for add-ons (swim, classes, etc.) */
+/* ============================================
+   ADD-ON SERVICES GRID (STEP 2)
+   ============================================ */
+
+/* Services grid layout - fixed 2 columns regardless of screen width
+   Displays Swimming, Classes, Massage, Physio as 2x2 grid */
 .services-grid {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Service cards - fixed height with overflow hidden for image clipping */
+/* Service card containers - fixed 110px height with overflow hidden
+   Contains background image with overlay gradient */
 .service-card {
   height: 110px;
   overflow: hidden;
 }
 
-/* Lift animation on hover - subtle Y translation */
+/* Hover lift effect - subtle 4px upward translation
+   Creates depth perception and indicates interactivity */
 .service-card:hover {
   transform: translateY(-4px);
 }
 
-/* Background images - cover sizing fills entire card */
+/* Service card background images - fills entire card
+   Object-fit cover ensures image fills space without distortion */
 .service-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Absolute positioning contexts - overlays, content, and badges inside cards */
+/* Absolute positioning context - overlays, content labels, and checkmarks
+   All positioned relative to service card boundaries */
 .service-card .overlay, .service-card .content, .service-card .check, .winner-badge {
   position: absolute;
 }
 
-/* Gradient overlays - dark bottom-to-top for text contrast over images */
+/* Gradient overlay - dark gradient from bottom to top (90% to 40% opacity)
+   Ensures white text remains readable over busy background images
+   Transition allows smooth color change when selected */
 .service-card .overlay {
   inset: 0;
   background: linear-gradient(to top, rgba(30,41,59,0.9), rgba(30,41,59,0.4));
   transition: background .2s;
 }
 
-/* Active service overlay - blue gradient indicating selection */
-.service-card.active .overlay {
-  background: linear-gradient(to top, rgba(14,165,233,0.9), rgba(6,182,212,0.5));
-}
-
-/* Service name positioning - anchored to bottom-left */
+/* Service name label - positioned bottom-left inside card
+   White text with flex layout for potential icon integration */
 .service-card .content {
   bottom: 12px;
   left: 12px;
@@ -294,7 +374,9 @@ body {
   font-size: 14px;
 }
 
-/* Checkmark circles - white background, hidden by default */
+/* Checkmark indicator - white circle, hidden by default (display: none)
+   Shown via .active class when service is selected
+   Centered flex container for the checkmark icon */
 .service-card .check {
   width: 22px;
   height: 22px;
@@ -305,59 +387,78 @@ body {
   justify-content: center;
 }
 
-/* Show checkmark when service is selected */
+/* Active state visibility - switches to flex display when selected
+   Reveals checkmark indicator */
 .service-card.active .check {
   display: flex;
 }
 
-/* Blue checkmark icon inside white circle */
+/* Checkmark icon inside circle - blue checkmark (brand color)
+   Smaller size (14px) fits inside 22px circle */
 .service-card .check svg {
   width: 14px;
   height: 14px;
   color: #0ea5e9;
 }
 
-/* Price comparison section spacing */
+/* ============================================
+   PRICE COMPARISON SECTION
+   ============================================ */
+
+/* Comparison section spacing - separates from selection panel above */
 .compare-section {
   margin-top: 40px;
 }
 
-/* Comparison header - space-between pushes title and winner text apart */
+/* Comparison header layout - flexbox with space-between
+   Pushes title left and winner/savings text to right */
 .compare-header {
   justify-content: space-between;
 }
 
-/* Typography grouping - large bold headings and prices */
+/* Shared typography scale - large bold text for headings and main prices
+   22px creates clear hierarchy below 48px hero headline */
 .compare-header h2, .price-display .amount {
   font-size: 22px;
   font-weight: 700;
 }
 
-/* Flex alignment for header with icon */
+/* Comparison title with icon - flex layout aligns icon and text
+   10px gap provides breathing room */
 .compare-header h2 {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Blue icon color in comparison header */
+/* Comparison header icon - brand blue color
+   SVG icon representing scales/balance metaphor */
 .compare-header h2 svg {
   color: #0ea5e9;
 }
 
-/* Green accents - winner text and free items in price breakdown */
+/* Winner/savings text - green accent color for positive indicators
+   Used for "Save £X" text and free item prices */
 .winner-text strong, .breakdown-list .item-price.free {
   color: #22c55e;
 }
 
-/* Side-by-side gym cards - responsive grid with minimum width */
+/* Side-by-side gym cards container - responsive grid layout
+   Auto-fit creates single column on mobile, 2 columns on desktop
+   320px minimum ensures cards don't get too narrow */
 .compare-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
-/* Gym card styling - larger radius, shadow, and transparent border reserve */
+/* ============================================
+   GYM PRICING CARDS
+   ============================================ */
+
+/* Gym card base styling - larger radius (20px) than other cards
+   Shadow for elevation, transparent border for state changes
+   Border-color transition animates selection states */
 .gym-card {
   border-radius: 20px;
   overflow: hidden;
@@ -366,49 +467,65 @@ body {
   transition: border-color .3s;
 }
 
-/* Winner state - green border for cheapest option */
+/* Winner state - green border indicates cheaper option
+   Applied dynamically by JavaScript */
 .gym-card.winner {
   border-color: #22c55e;
 }
 
-/* Selected states - brand-specific border colors */
+/* uGym selected state - brand blue border */
 .gym-card.selected {
   border-color: #0ea5e9;
 }
 
+/* Power Zone selected state - slate/dark border */
 .gym-card.power-selected {
   border-color: #475569;
 }
 
-/* Card headers - white text on colored backgrounds */
+/* Card header sections - white text on colored brand backgrounds
+   Padding creates internal spacing */
 .gym-header {
   padding: 24px;
   color: white;
 }
 
-/* Brand-specific header colors */
+/* uGym header background - bright blue brand color (#0ea5e9) */
 .gym-card.ugym .gym-header {
   background: #0ea5e9;
 }
 
+/* Power Zone header background - slate/dark gray brand color (#475569) */
 .gym-card.powerzone .gym-header {
   background: #475569;
 }
 
-/* Gym name in header */
+/* Gym name in header - 24px large with bold weight
+   4px margin creates space for potential subtitle */
 .gym-header h3 {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-/* Subtitle in header with slight transparency */
+/* Subtitle text in header - slight transparency (90% opacity)
+   Smaller text (13px) for secondary information */
 .gym-header p {
   opacity: .9;
   font-size: 13px;
 }
 
-/* Floating badge - positioned above card edge with negative top */
+/* Card body content area - padding separates content from edges
+   Relative positioning establishes context for absolute positioned badge */
+.gym-body {
+  padding: 28px;
+  position: relative;
+}
+
+/* Floating winner badge - positioned above card edge (negative top)
+   Green background with white text, rounded pill shape
+   Flex layout centers trophy icon with text
+   Currently not used in HTML but styled for future use */
 .winner-badge {
   top: -60px;
   right: 16px;
@@ -423,48 +540,55 @@ body {
   gap: 6px;
 }
 
-/* Trophy icon in winner badge */
+/* Trophy icon inside winner badge - 14px SVG icon */
 .winner-badge svg {
   width: 14px;
   height: 14px;
 }
 
-/* Card body padding and positioning context for absolute badge */
-.gym-body {
-  padding: 28px;
-  position: relative;
-}
+/* ============================================
+   PRICE DISPLAY COMPONENTS
+   ============================================ */
 
-/* Price display - centered alignment with vertical rhythm */
+/* Main price display area - center aligned for prominence
+   24px bottom margin separates from breakdown list */
 .price-display {
   text-align: center;
   margin-bottom: 24px;
 }
 
-/* Currency symbol - smaller and raised above baseline */
+/* Currency symbol (Â£) - smaller size (24px) and raised baseline
+   Creates typographic hierarchy with large amount number */
 .price-display .currency {
   font-size: 24px;
   vertical-align: top;
 }
 
-/* Main price number - very large for emphasis */
+/* Main price amount - very large (56px) for maximum emphasis
+   Tight line-height prevents excessive vertical spacing */
 .price-display .amount {
   font-size: 56px;
   line-height: 1;
 }
 
-/* Interval label spacing */
+/* Billing interval label ("per month") - smaller text below price
+   4px top margin creates visual separation */
 .price-display .period {
   font-size: 14px;
   margin-top: 4px;
 }
 
-/* Itemized pricing container */
+/* ============================================
+   PRICE BREAKDOWN LIST
+   ============================================ */
+
+/* Breakdown container - 24px bottom margin separates from select button */
 .breakdown {
   margin-bottom: 24px;
 }
 
-/* Section label - small uppercase with letter spacing */
+/* Breakdown section title - small uppercase with letter spacing
+   Creates visual hierarchy and section definition */
 .breakdown-title {
   font-size: 11px;
   font-weight: 700;
@@ -473,12 +597,14 @@ body {
   margin-bottom: 12px;
 }
 
-/* Remove default list styling */
+/* Remove default list styling - no bullets, no indentation */
 .breakdown-list {
   list-style: none;
 }
 
-/* Individual line items - flex separates label from price */
+/* Individual line items - flex layout pushes name left and price right
+   8px vertical padding creates row height
+   Bottom border separates items subtly */
 .breakdown-list li {
   display: flex;
   justify-content: space-between;
@@ -487,17 +613,19 @@ body {
   border-bottom: 1px solid #f1f5f9;
 }
 
-/* Remove border from final item */
+/* Remove border from final list item - cleaner appearance */
 .breakdown-list li:last-child {
   border-bottom: none;
 }
 
-/* Price values - bold weight for emphasis */
+/* Price values in list - bold weight for emphasis */
 .breakdown-list .item-price {
   font-weight: 600;
 }
 
-/* Joining fee notice - italic text with subtle background */
+/* Joining fee notice - centered italic text with subtle background
+   12px font size, 8px padding, 6px border radius
+   Currently not used in markup but available for future use */
 .joining-fee-display {
   text-align: center;
   font-size: 12px;
@@ -508,7 +636,13 @@ body {
   border-radius: 6px;
 }
 
-/* Select Plan button - full width with border */
+/* ============================================
+   SELECTION BUTTON
+   ============================================ */
+
+/* "Select Plan" button - full width of card container
+   2px border allows for color change on selection
+   Flex layout centers content with gap for potential icon */
 .select-btn {
   width: 100%;
   padding: 14px;
@@ -521,25 +655,34 @@ body {
   gap: 8px;
 }
 
-/* Blue text on hover */
+/* Hover state - blue text indicates interactivity
+   Border color changes via shared .select-btn:hover selector above */
 .select-btn:hover {
   color: #0ea5e9;
 }
 
-/* Selected state fills - brand-specific solid colors */
+/* Selected state - uGym variant - solid blue background
+   Text changes to white for contrast */
 .gym-card.ugym .select-btn.selected {
   background: #0ea5e9;
   border-color: #0ea5e9;
   color: white;
 }
 
+/* Selected state - Power Zone variant - solid slate background
+   Text changes to white for contrast */
 .gym-card.powerzone .select-btn.selected {
   background: #475569;
   border-color: #475569;
   color: white;
 }
 
-/* Info box - centered text with border */
+/* ============================================
+   INFO FOOTER
+   ============================================ */
+
+/* Info box container - subtle gray border, centered text
+   32px top margin separates from comparison cards */
 .info-box {
   margin-top: 32px;
   padding: 20px;
@@ -547,12 +690,21 @@ body {
   border: 1px solid #e2e8f0;
 }
 
+/* Info box text - smaller size (13px) with generous line height (1.8)
+   Secondary information should be readable but subdued */
 .info-box p {
   font-size: 13px;
   line-height: 1.8;
 }
 
-/* Fixed bottom bar - positioned at viewport bottom, hidden by default */
+/* ============================================
+   FIXED RESULT BAR (BOTTOM SHEET)
+   ============================================ */
+
+/* Fixed position container - sticks to viewport bottom
+   Initially hidden below viewport (translateY 100%)
+   Slides up when gym is selected (.visible class)
+   Z-index 100 ensures it floats above other content */
 .result-bar {
   position: fixed;
   bottom: 0;
@@ -567,26 +719,30 @@ body {
   transition: transform .3s;
 }
 
-/* Visible state - slides up into view when gym selected */
+/* Visible state - slides up into view when gym selected
+   Transform removed allows natural position at bottom */
 .result-bar.visible {
   transform: translateY(0);
 }
 
-/* Result bar inner layout - flex with space between icon/text and buttons */
+/* Result bar inner layout - flexbox with space-between
+   Left side: icon + text, Right side: action buttons */
 .result-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Left side grouping - icon and text side by side */
+/* Left side content grouping - flexbox with 16px gap
+   Aligns checkmark icon with selected plan text */
 .result-left {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* Blue square icon in result bar */
+/* Result bar icon container - 48px blue square with rounded corners
+   Background matches uGym brand color */
 .result-icon {
   width: 48px;
   height: 48px;
@@ -594,19 +750,20 @@ body {
   border-radius: 12px;
 }
 
-/* Smaller SVG in result icon */
+/* Icon SVG sizing - 24px white checkmark */
 .result-icon svg {
   width: 24px;
   height: 24px;
 }
 
-/* Selected plan name in result bar */
+/* Selected plan name text - 18px bold for emphasis */
 .result-text h4 {
   font-size: 18px;
   font-weight: 700;
 }
 
-/* Continue button - green solid with flex alignment */
+/* Continue button - green background (affirmative action)
+   Flex layout aligns text with arrow icon */
 .btn-continue {
   background: #22c55e;
   color: white;
@@ -616,12 +773,18 @@ body {
   gap: 8px;
 }
 
-/* Darker green on hover */
+/* Continue button hover - darker green for depth */
 .btn-continue:hover {
   background: #16a34a;
 }
 
-/* Reset button - fixed position top-right, circular */
+/* ============================================
+   FLOATING RESET BUTTON
+   ============================================ */
+
+/* Fixed position reset button - top-right corner of viewport
+   Circular (44px diameter) with white background
+   Subtle shadow for elevation */
 .reset-btn {
   position: fixed;
   top: 16px;
@@ -639,7 +802,7 @@ body {
   z-index: 50;
 }
 
-/* Gray refresh icon */
+/* Reset icon (refresh/rotate arrow) - gray color, 20px size */
 .reset-btn svg {
   width: 20px;
   height: 20px;

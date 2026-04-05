@@ -1,100 +1,113 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // DOM Elements
-  const dateInput = document.getElementById("start-date");
-  const sumDate = document.getElementById("sum-date");
-  const sumPlan = document.getElementById("sum-plan");
-  const sumType = document.getElementById("sum-type");
-  const sumEndDate = document.getElementById("sum-end-date");
-  const planButtons = document.querySelectorAll(".small-card");
-  const ticketCards = document.querySelectorAll(".card");
-  const paymentButtons = document.querySelectorAll(".payment-btn");
-  const paymentDetails = document.getElementById("payment-details");
-  const payBtn = document.getElementById("pay-btn");
-  const invoiceList = document.getElementById("invoice-list");
-  const confirmModal = document.getElementById("confirmModal");
-  const modalContent = document.getElementById("modalContent");
-  const closeModalBtn = document.getElementById("closeModalBtn");
+document.addEventListener("DOMContentLoaded", () => { // Runs when the page has fully loaded
   
-  // Payment inputs
-  const cardNumberInput = document.getElementById("card-number");
-  const cardNameInput = document.getElementById("card-name");
-  const expDateInput = document.getElementById("exp-date");
-  const cvcInput = document.getElementById("cvc");
+  // ===== DOM ELEMENTS =====
+  const dateInput = document.getElementById("start-date"); // Input where user selects start date
+  const sumDate = document.getElementById("sum-date"); // Displays selected start date in summary
+  const sumPlan = document.getElementById("sum-plan"); // Displays selected plan
+  const sumType = document.getElementById("sum-type"); // Displays membership type
+  const sumEndDate = document.getElementById("sum-end-date"); // Displays calculated end date
+  const planButtons = document.querySelectorAll(".small-card"); // All plan selection buttons
+  const ticketCards = document.querySelectorAll(".card"); // All membership cards
+  const paymentButtons = document.querySelectorAll(".payment-btn"); // Payment method buttons
+  const paymentDetails = document.getElementById("payment-details"); // Hidden payment form
+  const payBtn = document.getElementById("pay-btn"); // Confirm payment button
+  const invoiceList = document.getElementById("invoice-list"); // Invoice display area
+  const confirmModal = document.getElementById("confirmModal"); // Popup modal container
+  const modalContent = document.getElementById("modalContent"); // Modal text content
+  const closeModalBtn = document.getElementById("closeModalBtn"); // Final purchase button
   
-  // Error elements
-  const cardNumberError = document.getElementById("card-number-error");
-  const cardNameError = document.getElementById("card-name-error");
-  const expError = document.getElementById("exp-error");
-  const cvcError = document.getElementById("cvc-error");
+  // ===== PAYMENT INPUTS =====
+  const cardNumberInput = document.getElementById("card-number"); // Card number field
+  const cardNameInput = document.getElementById("card-name"); // Cardholder name field
+  const expDateInput = document.getElementById("exp-date"); // Expiry date field
+  const cvcInput = document.getElementById("cvc"); // CVC field
+  
+  // ===== ERROR ELEMENTS =====
+  const cardNumberError = document.getElementById("card-number-error"); // Error message for card number
+  const cardNameError = document.getElementById("card-name-error"); // Error message for name
+  const expError = document.getElementById("exp-error"); // Error message for expiry
+  const cvcError = document.getElementById("cvc-error"); // Error message for CVC
 
-  // State
-  let paymentMethodSelected = false;
-  let selectedMonths = 1;
-  let selectedTicketType = "Normal";
+  // ===== STATE VARIABLES =====
+  let paymentMethodSelected = false; // Tracks if user selected a payment method
+  let selectedMonths = 1; // Default plan duration (1 month)
+  let selectedTicketType = "Normal"; // Default membership type
 
-  // Date helpers
+  // ===== DATE FUNCTIONS =====
+
+  // Formats a date into DD/MM/YYYY for display
   function formatDateDMY(date) {
-    const d = String(date.getDate()).padStart(2, "0");
-    const m = String(date.getMonth() + 1).padStart(2, "0");
-    const y = date.getFullYear();
-    return `${d}/${m}/${y}`;
+    const d = String(date.getDate()).padStart(2, "0"); // Ensures 2-digit day
+    const m = String(date.getMonth() + 1).padStart(2, "0"); // Month is 0-based
+    const y = date.getFullYear(); // Gets full year
+    return `${d}/${m}/${y}`; // Returns formatted string
   }
 
+  // Adds a number of months to a date (used for end date calculation)
   function addMonths(date, months) {
-    const d = new Date(date);
-    const startDay = d.getDate();
-    d.setMonth(d.getMonth() + months);
-    if (d.getDate() < startDay) d.setDate(0);
+    const d = new Date(date); // Create a copy of date
+    const startDay = d.getDate(); // Store original day
+    d.setMonth(d.getMonth() + months); // Add months
+    if (d.getDate() < startDay) d.setDate(0); // Fix overflow (e.g. Feb shorter months)
     return d;
   }
 
+  // Updates the end date shown in the summary
   function updateEndDate() {
-    if (!dateInput.value || !selectedMonths) {
-      sumEndDate.textContent = "—";
+    if (!dateInput.value || !selectedMonths) { // If no date or plan selected
+      sumEndDate.textContent = "—"; // Show placeholder
       return;
     }
-    const start = new Date(dateInput.value);
-    const end = addMonths(start, selectedMonths);
-    sumEndDate.textContent = formatDateDMY(end);
+    const start = new Date(dateInput.value); // Get start date
+    const end = addMonths(start, selectedMonths); // Calculate end date
+    sumEndDate.textContent = formatDateDMY(end); // Display formatted date
   }
 
-  // Discount helpers
+  // ===== DISCOUNT FUNCTIONS =====
+
+  // Returns discount rate depending on gym and membership type
   function getDiscountRate(selectedGym, ticketType) {
     if (ticketType === "Student") return selectedGym === "uGym" ? 0.20 : 0.15;
     if (ticketType === "Pensioners") return selectedGym === "uGym" ? 0.15 : 0.20;
-    return 0;
+    return 0; // Normal users get no discount
   }
 
+  // Checks if an item is eligible for discount
   function isDiscountableItem(itemName) {
     const name = itemName.toLowerCase();
-    return !name.includes("massage") && !name.includes("physio");
+    return !name.includes("massage") && !name.includes("physio"); // These services are excluded
   }
 
-  // Validation
+  // ===== VALIDATION =====
+
+  // Validates all payment inputs and enables/disables button
   function validatePaymentForm() {
-    const cardNumberValid = cardNumberInput.value.replace(/\s/g, "").length === 16;
-    const cardNameValid = /^[A-Za-z\s]{2,}$/.test(cardNameInput.value);
-    const expValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expDateInput.value);
-    const cvcValid = /^\d{3}$/.test(cvcInput.value);
+    const cardNumberValid = cardNumberInput.value.replace(/\s/g, "").length === 16; // Must be 16 digits
+    const cardNameValid = /^[A-Za-z\s]{2,}$/.test(cardNameInput.value); // Only letters, min length 2
+    const expValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expDateInput.value); // Format MM/YY
+    const cvcValid = /^\d{3}$/.test(cvcInput.value); // Must be exactly 3 digits
 
     const allValid = paymentMethodSelected && cardNumberValid && cardNameValid && expValid && cvcValid;
-    payBtn.disabled = !allValid;
+    payBtn.disabled = !allValid; // Disable button if any condition fails
   }
 
-  // Invoice rendering
+  // ===== INVOICE GENERATION =====
+
+  // Builds and displays invoice dynamically
   function renderInvoice() {
-    const raw = localStorage.getItem("invoiceData");
+    const raw = localStorage.getItem("invoiceData"); // Retrieve stored data
     if (!raw) {
       invoiceList.innerHTML = "<div>No invoice data found. Please go to gym comparison first.</div>";
       return "0.00";
     }
     
-    const data = JSON.parse(raw);
-    const discountRate = getDiscountRate(data.selectedGym, selectedTicketType);
-    let monthlyTotal = 0;
-    let discountAmount = 0;
-    let html = "";
+    const data = JSON.parse(raw); // Convert JSON to object
+    const discountRate = getDiscountRate(data.selectedGym, selectedTicketType); // Get discount rate
+    let monthlyTotal = 0; // Tracks monthly cost
+    let discountAmount = 0; // Tracks total discount
+    let html = ""; // HTML output
 
+    // Basic info
     html += `<div><strong>Gym:</strong> ${data.selectedGymLabel}</div>`;
     html += `<div><strong>Access Type:</strong> ${data.gymAccess}</div>`;
     html += `<div><strong>Extras:</strong> ${data.extras.length ? data.extras.join(", ") : "None"}</div>`;
@@ -102,13 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
     html += `<div><strong>Payment Plan:</strong> ${selectedMonths} month${selectedMonths > 1 ? "s" : ""}</div>`;
     html += `<hr class="invoice-divider">`;
 
+    // Loop through items and apply discount if applicable
     data.items.forEach(item => {
       const original = Number(item.price);
       let final = original;
       let note = "";
       
       if (isDiscountableItem(item.name) && discountRate > 0) {
-        final = original * (1 - discountRate);
+        final = original * (1 - discountRate); // Apply discount
         note = ` (${Math.round(discountRate * 100)}% off)`;
       }
       
@@ -117,39 +131,40 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `<div><strong>${item.name}:</strong> £${final.toFixed(2)}/month${note}</div>`;
     });
 
-    const planTotal = monthlyTotal * selectedMonths;
-    const totalDue = planTotal + Number(data.joiningFee);
+    const planTotal = monthlyTotal * selectedMonths; // Total for plan duration
+    const totalDue = planTotal + Number(data.joiningFee); // Add joining fee
 
+    // Final breakdown
     html += `<div><strong>Joining Fee:</strong> £${Number(data.joiningFee).toFixed(2)}</div>`;
     html += `<div><strong>Monthly Discount:</strong> -£${discountAmount.toFixed(2)}</div>`;
     html += `<div><strong>Plan Total:</strong> £${planTotal.toFixed(2)}</div>`;
     html += `<div><strong>Total Due:</strong> £${totalDue.toFixed(2)}</div>`;
     
-    invoiceList.innerHTML = html;
-    return totalDue.toFixed(2);
+    invoiceList.innerHTML = html; // Render to page
+    return totalDue.toFixed(2); // Return final amount
   }
 
-  // Event Listeners
-  
-  // Date selection
+  // ===== EVENT LISTENERS =====
+
+  // When user selects a date
   dateInput.addEventListener("change", () => {
     sumDate.textContent = dateInput.value ? formatDateDMY(new Date(dateInput.value)) : "—";
-    updateEndDate();
+    updateEndDate(); // Update end date automatically
   });
 
-  // Plan selection
+  // Plan selection logic
   planButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      planButtons.forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      sumPlan.textContent = btn.dataset.plan;
-      selectedMonths = parseInt(btn.dataset.months, 10);
+      planButtons.forEach(b => b.classList.remove("selected")); // Remove previous selection
+      btn.classList.add("selected"); // Highlight clicked button
+      sumPlan.textContent = btn.dataset.plan; // Update summary
+      selectedMonths = parseInt(btn.dataset.months, 10); // Store selected months
       updateEndDate();
-      renderInvoice();
+      renderInvoice(); // Recalculate invoice
     });
   });
 
-  // Category selection
+  // Membership type selection
   ticketCards.forEach(card => {
     card.querySelector(".btn").addEventListener("click", () => {
       ticketCards.forEach(c => c.classList.remove("selected"));
@@ -165,16 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       paymentButtons.forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
-      paymentDetails.classList.remove("hidden");
+      paymentDetails.classList.remove("hidden"); // Show form
       paymentMethodSelected = true;
       validatePaymentForm();
     });
   });
 
-  // Input formatting and validation
+  // Card number formatting and validation
   cardNumberInput.addEventListener("input", () => {
-    let value = cardNumberInput.value.replace(/\D/g, "").slice(0, 16);
-    value = value.replace(/(\d{4})(?=\d)/g, "$1 ");
+    let value = cardNumberInput.value.replace(/\D/g, "").slice(0, 16); // Only digits
+    value = value.replace(/(\d{4})(?=\d)/g, "$1 "); // Add space every 4 digits
     cardNumberInput.value = value;
 
     if (value.replace(/\s/g, "").length !== 16) {
@@ -187,8 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
     validatePaymentForm();
   });
 
+  // Name validation
   cardNameInput.addEventListener("input", () => {
-    cardNameInput.value = cardNameInput.value.replace(/[^a-zA-Z\s]/g, "");
+    cardNameInput.value = cardNameInput.value.replace(/[^a-zA-Z\s]/g, ""); // Remove invalid chars
     
     if (cardNameInput.value.length < 2) {
       cardNameError.textContent = "Enter a valid name";
@@ -200,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     validatePaymentForm();
   });
 
+  // Expiry date formatting
   expDateInput.addEventListener("input", () => {
     let value = expDateInput.value.replace(/\D/g, "").slice(0, 4);
     if (value.length >= 3) {
@@ -217,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
     validatePaymentForm();
   });
 
+  // CVC validation
   cvcInput.addEventListener("input", () => {
     cvcInput.value = cvcInput.value.replace(/\D/g, "").slice(0, 3);
     
@@ -230,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
     validatePaymentForm();
   });
 
-  // Confirm payment button - shows modal
+  // Confirm payment button
   payBtn.addEventListener("click", () => {
     if (!dateInput.value) {
       alert("Please choose a start date.");
@@ -243,10 +261,10 @@ document.addEventListener("DOMContentLoaded", () => {
       <div>Total Amount: £${totalPrice}</div>
       <div>Click below to complete your purchase</div>
     `;
-    confirmModal.classList.remove("hidden");
+    confirmModal.classList.remove("hidden"); // Show modal
   });
 
-  // Complete purchase - saves to backend and redirects
+  // Final purchase and backend saving
   closeModalBtn.addEventListener("click", async () => {
     const invoiceData = JSON.parse(localStorage.getItem("invoiceData") || "{}");
     
@@ -257,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const startDate = dateInput.value;
     const endDateParts = sumEndDate.textContent.split('/');
-    const mysqlEndDate = `${endDateParts[2]}-${endDateParts[1]}-${endDateParts[0]}`;
+    const mysqlEndDate = `${endDateParts[2]}-${endDateParts[1]}-${endDateParts[0]}`; // Convert to YYYY-MM-DD
     const priceText = invoiceList.lastElementChild.textContent;
     const price = priceText.match(/[\d.]+/)[0];
 
@@ -271,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch('/api/save_membership', {
+      const response = await fetch('/api/save_membership', { // Send data to backend
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
@@ -281,9 +299,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (response.ok) {
         alert(`Success! Your Membership ID: ${result.membershipId}\nTotal Paid: £${price}`);
-        localStorage.removeItem('invoiceData');
-        // Use routes passed from HTML
-        window.location.href = window.appRoutes.index;
+        localStorage.removeItem('invoiceData'); // Clear stored data
+        window.location.href = window.appRoutes.index; // Redirect home
       } else if (response.status === 401) {
         alert('Session expired. Please login again.');
         window.location.href = window.appRoutes.accountPage;
@@ -296,6 +313,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initialize
-  renderInvoice();
+  // Initial load
+  renderInvoice(); // Display invoice when page loads
 });

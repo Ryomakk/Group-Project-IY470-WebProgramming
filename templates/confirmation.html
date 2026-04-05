@@ -1,36 +1,65 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Makes the page responsive on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Page title shown in browser tab -->
   <title>Payment Confirmation</title>
+  
+  <!-- Links to your custom CSS file using Flask -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/confirmation.css') }}">
+  
+  <!-- Font Awesome for icons (credit card, PayPal, etc.) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
+  <!-- Main page heading -->
   <h1 class="heading">PAYMENT CONFIRMATION</h1>
 
   <div class="page">
+    
+    <!-- LEFT SIDE: User input (date, plan, category) -->
     <main class="left">
+      
+      <!-- Top row contains start date and plan selection -->
       <section class="top-row">
+        
+        <!-- Start date selection -->
         <div class="startdate">
           <label for="start-date">Choose a start date please</label>
+          <!-- Date input field -->
           <input type="date" id="start-date" name="start-date" />
         </div>
 
+        <!-- Payment plan selection -->
         <div class="plan-area">
           <h2 class="section-title">Choose a payment plan</h2>
+          
+          <!-- Buttons for plan options -->
           <div class="plan-boxes">
+            <!-- Default selected plan -->
             <button class="small-card selected" type="button" data-plan="1 Month" data-months="1">1 Month</button>
+            
+            <!-- 6-month plan -->
             <button class="small-card" type="button" data-plan="6 Months" data-months="6">6 Months</button>
+            
+            <!-- Yearly plan -->
             <button class="small-card" type="button" data-plan="Yearly" data-months="12">Yearly</button>
           </div>
         </div>
       </section>
 
+      <!-- Membership category selection -->
       <section class="category">
         <h2 class="section-title">Select Your Category</h2>
+        
+        <!-- Cards for different user types -->
         <div class="card-container">
+          
+          <!-- Normal membership -->
           <div class="card selected" data-type="Normal">
             <h3>Normal</h3>
             <hr />
@@ -41,6 +70,8 @@
             </ul>
             <button class="btn" type="button">Choose</button>
           </div>
+
+          <!-- Student membership -->
           <div class="card" data-type="Student">
             <h3>Student (discount!!)</h3>
             <hr />
@@ -51,6 +82,8 @@
             </ul>
             <button class="btn" type="button">Choose</button>
           </div>
+
+          <!-- Pensioner membership -->
           <div class="card" data-type="Pensioners">
             <h3>Pensioners (discount!!)</h3>
             <hr />
@@ -62,68 +95,99 @@
             <button class="btn" type="button">Choose</button>
           </div>
         </div>
+
+        <!-- Invoice/details section (likely filled by JS) -->
         <div class="details-box">
           <h3><b>Invoice</b></h3>
+          <!-- Dynamic content goes here -->
           <div class="detail-page" id="invoice-list"></div>
         </div>
       </section>
     </main>
 
+    <!-- RIGHT SIDE: Summary + payment -->
     <aside class="right">
       <h2 class="section-title">Summary</h2>
+      
       <div class="summary-box">
+        
+        <!-- Displays selected start date -->
         <p><b>Start date:</b> <span id="sum-date">—</span></p>
+        
+        <!-- Displays selected plan -->
         <p><b>Plan:</b> <span id="sum-plan">1 Month</span></p>
+        
+        <!-- Displays selected category -->
         <p><b>Ticket type:</b> <span id="sum-type">Normal</span></p>
+        
+        <!-- Displays calculated end date -->
         <p><b>End date:</b> <span id="sum-end-date">—</span></p>
+        
+        <!-- Payment section -->
         <div class="payment-methods">
           <p><b>Payment method:</b></p>
+          
+          <!-- Payment method buttons with icons -->
           <div class="payment-options">
             <button class="payment-btn" type="button"><i class="fa-solid fa-credit-card fa-2xl"></i></button>
             <button class="payment-btn" type="button"><i class="fa-brands fa-google-pay fa-2xl"></i></button>
             <button class="payment-btn" type="button"><i class="fa-brands fa-apple-pay fa-2xl"></i></button>
             <button class="payment-btn" type="button"><i class="fa-brands fa-cc-paypal fa-2xl"></i></button>
           </div>
+
+          <!-- Card payment form (hidden by default) -->
           <div class="payment-details hidden" id="payment-details">
             <p><b>Payment details:</b></p>
             
+            <!-- Card number input -->
             <label for="card-number">Card number</label>
             <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456" inputmode="numeric" />
             <small class="error" id="card-number-error"></small>
 
+            <!-- Card holder name -->
             <label for="card-name">Card name</label>
             <input type="text" id="card-name" placeholder="Name" />
             <small class="error" id="card-name-error"></small>
 
+            <!-- Expiry date -->
             <label for="exp-date">Exp date</label>
             <input type="text" id="exp-date" maxlength="5" placeholder="MM/YY" inputmode="numeric" />
             <small class="error" id="exp-error"></small>
 
+            <!-- CVC security code -->
             <label for="cvc">CVC</label>
             <input type="text" id="cvc" maxlength="3" placeholder="012" inputmode="numeric" />
             <small class="error" id="cvc-error"></small>
           </div>
+
+          <!-- Confirm payment button (disabled until valid) -->
           <button class="pay-btn" id="pay-btn" type="button" disabled>Confirm Payment</button>
         </div>
       </div>
     </aside>
   </div>
 
+  <!-- Confirmation popup modal -->
   <section id="confirmModal" class="modal hidden">
     <div class="modal-box">
       <h2>🎉 Congratulations! 🎉</h2>
+      <!-- Content filled dynamically -->
       <div id="modalContent"></div>
+      
+      <!-- Button to finish purchase -->
       <button type="button" class="pay-btn" id="closeModalBtn">Complete Purchase</button>
     </div>
   </section>
 
-  <!-- Pass Flask routes to JavaScript -->
+  <!-- Pass Flask routes into JavaScript -->
   <script>
     window.appRoutes = {
       index: "{{ url_for('index') }}",
       accountPage: "{{ url_for('account_page') }}"
     };
   </script>
+
+  <!-- Link to your JavaScript file -->
   <script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
 </body>
 </html>
